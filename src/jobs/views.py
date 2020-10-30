@@ -1,5 +1,12 @@
 from django.shortcuts import render
 
 
-def index(request):
-    return render(request, 'index.html', {})
+from .models import Job
+
+
+def all_jobs(request):
+    jobs = Job.objects.all()
+    context = {
+        'jobs': jobs,
+    }
+    return render(request, 'jobs/all.html', context)

@@ -35,10 +35,13 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'tinymce',
+    'crispy_forms',
 
     # Own
     'jobs',
     'users',
+    'cvwriting',
+    'hiring',
 ]
 
 MIDDLEWARE = [
@@ -158,3 +161,16 @@ DEFAULT = {
 }
 
 TINYMCE_JS_URL = 'http://cdn.tinymce.com/4/tinymce.min.js'
+
+
+
+# Crispy Forms
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+
+# Allauth
+ACCOUNT_FORMS = {'signup': 'users.forms.myForm'}
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_REQUIRED=True

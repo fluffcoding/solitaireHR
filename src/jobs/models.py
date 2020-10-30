@@ -1,7 +1,7 @@
 from django.db import models
 from tinymce import models as tinymce_models
 from django_countries.fields import CountryField
-import calendar
+
 choices = {
     'salary_type' : [
         (0,'Daily'),

@@ -1,0 +1,23 @@
+{% load static %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'base_components/head.html' %}
+
+<body class="index-page">
+    <!-- Navbar -->
+    {% include 'base_components/navbar.html' %}
+    <!-- End Navbar -->
+    {% block content %}
+
+    {% endblock %}
+    {% include 'base_components/footer.html' %}
+    </div>
+    <!--   Core JS Files   -->
+    {% include 'base_components/scripts.html' %}
+</body>
+
+</html>
