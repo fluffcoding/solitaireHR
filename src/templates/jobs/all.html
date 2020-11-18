@@ -1,16 +1,11 @@
-{% extends 'base.html' %}
-
-{% block title %}
-{% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% block title %} {% endblock %} {% block content %}
 <style>
-    body {
-        background-color: #f4f5f7
-    }
+  body {
+    background-color: #f4f5f7;
+  }
 </style>
 <div class="wrapper">
-    <div class=" section-shaped">
+    <div class="section-shaped">
         <div class="shape shape-style-3 shape-default">
             <span class="span-150"></span>
             <span class="span-50"></span>
@@ -19,97 +14,118 @@
             <div class="container shape-container d-flex align-items-center py-lg">
                 <div class="col px-0">
                     <div class="row align-items-center justify-content-center">
-                        <div class="col-lg-6 text-center">
-                        </div>
+                        <div class="col-lg-6 text-center"></div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
-    <div class="section features-1 mt--8 ">
+    <div class="section features-1 mt--8">
         <div class="container">
             <div class="card">
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <div class="form-group ml-3 mt-3">
-                                    <input type="text" placeholder="Skill, Company.." class="form-control"/>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group mt-3">
-                                    <input type="text" placeholder="City" class="form-control"/>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group mt-3">
-                                    <input type="text" placeholder="Functional Area" class="form-control"/>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <button class="btn btn-primary mt-3">Search</button>
-                            </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-group ml-3 mt-3">
+                            <input type="text" placeholder="Skill, Company.." class="form-control">
                         </div>
-                        <div class="row">
-                            <div class="col-lg-4 col-md-12">
-                                <div class="card m-3">
-                                    <div class="card-header">
-                                        City
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="form-group">
-                                            <input type="text" placeholder="Regular" class="form-control" />
-                                          </div>
-                                    </div>
-                                </div>
-                                <div class="card m-3">
-                                    <div class="card-header">
-                                        City
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="form-group">
-                                            <input type="text" placeholder="Regular" class="form-control" />
-                                          </div>
-                                    </div>
-                                </div>
-                                <div class="card m-3">
-                                    <div class="card-header">
-                                        City
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="form-group">
-                                            <input type="text" placeholder="Regular" class="form-control" />
-                                          </div>
-                                    </div>
-                                </div>
-                                <div class="card m-3">
-                                    <div class="card-header">
-                                        City
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="form-group">
-                                            <input type="text" placeholder="Regular" class="form-control" />
-                                          </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-8 col-md-12">
-                                <div class="card mt-3 p-3 mr-3">
-                                    <p>
-                                        <b>
-                                            Call Center Representative
-                                        </b> Lahore, Pakistan 
-                                    </p>
-                                    <p>
-                                        Marketing Pvt Ltd
-                                    </p>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group mt-3">
+                            <input type="text" placeholder="City" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group mt-3">
+                            <input type="text" placeholder="Functional Area" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <button class="btn btn-primary mt-3 mr-3 float-right">Search</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-12">
+                        <div class="card m-3">
+                            <div class="card-header">City</div>
+                            <div class="card-footer">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Regular" class="form-control">
                                 </div>
                             </div>
                         </div>
+                        <div class="card m-3">
+                            <div class="card-header">City</div>
+                            <div class="card-footer">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Regular" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card m-3">
+                            <div class="card-header">City</div>
+                            <div class="card-footer">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Regular" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card m-3">
+                            <div class="card-header">City</div>
+                            <div class="card-footer">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Regular" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-12">
+                        {% for job in jobs %}
+                        <div class="card mt-3  mr-3 bg-secondary">
+                            <div class="pt-3 pl-3 pr-3">
+                                <p style="margin: 0">
+                                    <b> {{job.job_designation}}</b>
+                                    {{job.city}}, {{job.country}}
+                                    <span class="float-right">
+                                        <i class="far fa-clock" style="opacity: 60%"></i>
+                                        1 Day ago
+                                    </span
+                    >
+                                </p>
+                                <p style="font-size: 14px; margin: 5px; margin-bottom: 15px">
+                                    Marketing Pvt Ltd
+                                </p>
+                                <div class="row text-center p-2 m-1 rounded text-white" style="font-size: 12px; background-color: #adb5bd;">
+                                    <div class="col">
+                                        Rs:
+                                        <b> {{job.minimum_salary}}-{{job.max_salary}} Salary</b>
+                                    </div>
+                                    <div class="col">{{job.experience}} Experience</div>
+                                    <div class="col">5 Total Positions</div>
+                                </div>
+                                <p class="m-3" style="font-size: 12px">
+                                    We are looking for people willing to work in Core PHP and other
+                    web technologies also have interest in developing CRM systems
+                    like Salesforce, Copper ...
+                                </p>
+                            </div>
+                            
+                            <div class="card-footer p-3">
+                                <p  style="margin:0; font-size:15px;">
+                                    <span class="mr-3 ml-3">
+                                        Core PHP
+                                    </span>
+                                    <span class="mr-3 ml-3">
+                                        Javascript
+                                    </span></p>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <p>No Jobs found</p>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
 </div>
-
 {% endblock %}

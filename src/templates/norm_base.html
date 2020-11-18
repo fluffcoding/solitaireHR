@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% block title %} {% endblock %} {% block content %}
+<style>
+  body {
+    background-color: #f4f5f7;
+  }
+</style>
+<div class="wrapper">
+    <div class="section-shaped">
+        <div class="shape shape-style-3 shape-default">
+            <span class="span-150"></span>
+            <span class="span-50"></span>
+        </div>
+        <div class="page-header">
+            <div class="container shape-container d-flex align-items-center py-lg">
+                <div class="col px-0">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-lg-6 text-center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block page %}
+    {% endblock page %}
+    </div>
+    {% endblock content %}
+

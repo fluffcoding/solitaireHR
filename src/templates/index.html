@@ -7,6 +7,86 @@ Solitaire HR - Home Page
 {% endblock %}
 
 {% block content %}
+<style>
+    /*
+ CSS for the main interaction
+*/
+.tabset > input[type="radio"] {
+  position: absolute;
+  left: -200vw;
+
+}
+
+.tabset .tab-panel {
+  display: none;
+}
+
+.tabset > input:first-child:checked ~ .tab-panels > .tab-panel:first-child,
+.tabset > input:nth-child(3):checked ~ .tab-panels > .tab-panel:nth-child(2),
+.tabset > input:nth-child(5):checked ~ .tab-panels > .tab-panel:nth-child(3),
+.tabset > input:nth-child(7):checked ~ .tab-panels > .tab-panel:nth-child(4),
+.tabset > input:nth-child(9):checked ~ .tab-panels > .tab-panel:nth-child(5),
+.tabset > input:nth-child(11):checked ~ .tab-panels > .tab-panel:nth-child(6) {
+  display: block;
+}
+
+/*
+ Styling
+*/
+
+.tabset > label {
+  position: relative;
+  display: inline-block;
+  padding: 15px 15px 25px;
+  border: 1px solid transparent;
+  border-bottom: 0;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.tabset > label::after {
+  content: "";
+  position: absolute;
+  left: 15px;
+  bottom: 10px;
+  width: 22px;
+  height: 4px;
+  background: #8d8d8d;
+}
+
+.tabset > label:hover,
+.tabset > input:focus + label {
+  color: #06c;
+}
+
+.tabset > label:hover::after,
+.tabset > input:focus + label::after,
+.tabset > input:checked + label::after {
+  background: #06c;
+}
+
+.tabset > input:checked + label {
+  border-color: #ccc;
+  border-bottom: 1px solid #fff;
+  margin-bottom: -1px;
+}
+
+.tab-panel {
+  padding: 30px 0;
+  border-top: 1px solid #ccc;
+}
+/*
+ Demo purposes only
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.tabset {
+  max-width: 65em;
+} */
+</style>
 <div class="wrapper">
     <div class="section section-hero section-shaped">
         <div class="shape shape-style-1 shape-primary">
@@ -49,8 +129,7 @@ Solitaire HR - Home Page
                                 <div class="row">
                                     <div class="col-8">
                                         <div class="form-group">
-                                            <input type="text" class="form-control"
-                                                placeholder="What are you looking for?">
+                                            <input type="text" class="form-control" placeholder="What are you looking for?">
                                         </div>
                                     </div>
                                     <div class="col-4">
@@ -65,54 +144,165 @@ Solitaire HR - Home Page
                         <div class="col-lg-4 col-md-12 col-sm-12">
                             <div class="card mt-5">
                                 <div class="card-header">
-                                        <div class="list-group list-group-horizontal-lg ml-4" id="list-tab" role="tablist">
-                                            <a class="list-group-item list-group-item-action active mb-sm-3 mb-md-0" id="list-home-list"
-                                                data-toggle="list" href="#list-job-seeker" role="tab" aria-controls="home"
-                                                style="width:fit-content;">Job Seeker</a>
-                                            <a class="list-group-item list-group-item-action mb-sm-3 mb-md-0" id="list-profile-list"
-                                                data-toggle="list" href="#list-employer" role="tab" aria-controls="profile"
-                                                style="width:fit-content;">Employer</a>
-                                        </div>
-                                </div>
-                                <div class="row">
-                                    <div class="card-body mb-3 mr-3 ml-3 p-4" style="background-color: rgba(255, 255, 255, 1);">
-                                        <div class="tab-content" id="nav-tabContent">
-                                            <div class="tab-pane fade show active" id="list-job-seeker" role="tabpanel"
-                                                aria-labelledby="list-home-list"> 
+                                    <div class="tabset">
+                                        <!-- Tab 1 -->
+                                        <input
+                                            type="radio"
+                                            name="tabset"
+                                            id="tab-job"
+                                            aria-controls="tab-job"
+                                            checked
+                                        >
+                                        <label for="tab-job">Job Seeker</label>
+                                        <!-- Tab 2 -->
+                                        <input
+                                            type="radio"
+                                            name="tabset"
+                                            id="tab-employer"
+                                            aria-controls="tab-employer"
+                                        >
+                                        <label for="tab-employer">Employer</label>
+                                        <div class="tab-panels">
+                                            <section id="tab-job" class="tab-panel">
                                                 <p class="text-center">Job Seeker Signup</p>
-                                                <form class="signup" id="signup_form" method="post" action=".">
+                                                <form
+                                                    class="signup"
+                                                    id="signup_form"
+                                                    method="post"
+                                                    action="."
+                                                >
                                                     {% csrf_token %}
-                                                {{form|crispy}}
-                                                {% if redirect_field_value %}
-                                                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                                                {% endif %}
-                                                <button type="submit" class="btn btn-secondary">{% trans "Register Now" %} &raquo;</button>
-                                              </form>
-                                            </div>
-                                            <div class="tab-pane fade" id="list-employer" role="tabpanel"
-                                                aria-labelledby="list-profile-list">
+                                            {{form|crispy}}
+                                            {% if redirect_field_value %}
+                                                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+                                                    {% endif %}
+                                                    <button type="submit" class="btn btn-secondary">{% trans "Register Now" %} &raquo;</button>
+                                                </form>
+                                            </section>
+                                            <section id="tab-employer" class="tab-panel">
                                                 <p class="text-center">Employer Signup</p>
-                                                 {{form|crispy}}
-                                            </div>
+                                                <form
+                                                    class="signup"
+                                                    id="signup_form"
+                                                    method="post"
+                                                    action="."
+                                                >
+                                                    {% csrf_token %}
+                                            {{form|crispy}}
+                                            {% if redirect_field_value %}
+                                                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+                                                    {% endif %}
+                                                    <button type="submit" class="btn btn-secondary">{% trans "Register Now" %} &raquo;</button>
+                                                </form>
+                                            </section>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- <div class="row">
+                                    <div class="card-body mb-3 mr-3 ml-3 p-4" style="background-color: rgba(255, 255, 255, 1);">
+                                        <div class="tab-content" id="nav-tabContent">
+                                            <div
+                                                class="tab-pane fade show active"
+                                                id="list-job-seeker"
+                                                role="tabpanel"
+                                                aria-labelledby="list-home-list"
+                                            >
+                                                <p class="text-center">Job Seeker Signup</p>
+                                                <form
+                                                    class="signup"
+                                                    id="signup_form"
+                                                    method="post"
+                                                    action="."
+                                                >
+                                                    {% csrf_token %}
+                                                {{form|crispy}}
+                                                {% if redirect_field_value %}
+                                                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+                                                    {% endif %}
+                                                    <button type="submit" class="btn btn-secondary">{% trans "Register Now" %} &raquo;</button>
+                                                </form>
+                                            </div>
+                                            <div
+                                                class="tab-pane fade"
+                                                id="list-employer"
+                                                role="tabpanel"
+                                                aria-labelledby="list-profile-list"
+                                            >
+                                                <p class="text-center">Employer Signup</p>
+                                                {{form|crispy}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
                             </div>
-                            
-                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="separator separator-bottom separator-skew zindex-100">
-        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
-            xmlns="http://www.w3.org/2000/svg">
-            <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
-        </svg>
+    <div class="text-center p-3">
+        <h3>Companies currently hiring in Pakistan</h3>
+        <img src="https://www.logaster.com/blog/wp-content/uploads/2018/04/Apple-logo-history.jpg" width="600px;">
+    </div>
+    <div class="container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a
+                    class="nav-link active"
+                    id="home-tab"
+                    data-toggle="tab"
+                    href="#home"
+                    role="tab"
+                    aria-controls="home"
+                    aria-selected="true"
+                >Industry</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a
+                    class="nav-link"
+                    id="profile-tab"
+                    data-toggle="tab"
+                    href="#profile"
+                    role="tab"
+                    aria-controls="profile"
+                    aria-selected="false"
+                >Job Type</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a
+                    class="nav-link"
+                    id="contact-tab"
+                    data-toggle="tab"
+                    href="#contact"
+                    role="tab"
+                    aria-controls="contact"
+                    aria-selected="false"
+                >Location</a>
+            </li>
+        </ul>
+        <div class="p-3">
+            <div class="tab-content" id="myTabContent">
+                <div
+                    class="tab-pane fade show active"
+                    id="home"
+                    role="tabpanel"
+                    aria-labelledby="home-tab"
+                >...</div>
+                <div
+                    class="tab-pane fade"
+                    id="profile"
+                    role="tabpanel"
+                    aria-labelledby="profile-tab"
+                >...</div>
+                <div
+                    class="tab-pane fade"
+                    id="contact"
+                    role="tabpanel"
+                    aria-labelledby="contact-tab"
+                >...</div>
+            </div>
+        </div>
     </div>
 </div>
-
 {% endblock content %}
