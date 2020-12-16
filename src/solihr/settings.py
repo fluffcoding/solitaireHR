@@ -37,11 +37,20 @@ INSTALLED_APPS = [
     'tinymce',
     'crispy_forms',
 
+    'rest_framework',
+
+    'django_filters',
+
+    'bootstrap_datepicker_plus',
+
+
     # Own
     'jobs',
     'users',
     'cvwriting',
     'hiring',
+    'public',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -146,21 +155,21 @@ SITE_ID = 1
 
 # TinyMCE Default Config
 
-DEFAULT = {
-    'selector': 'textarea',
-    'theme': 'modern',
-    'plugins': 'link image preview codesample contextmenu table code lists',
-    'toolbar1': 'formatselect | bold italic underline | alignleft aligncenter alignright alignjustify '
-               '| bullist numlist | outdent indent | table | link image | codesample | preview code',
-    'contextmenu': 'formats | link image',
-    'menubar': False,
-    'inline': False,
-    'statusbar': True,
-    'width': 'auto',
-    'height': 360,
-}
+# DEFAULT = {
+#     'selector': 'textarea',
+#     'theme': 'modern',
+#     'plugins': 'link image preview codesample contextmenu table code lists',
+#     'toolbar1': 'formatselect | bold italic underline | alignleft aligncenter alignright alignjustify '
+#                '| bullist numlist | outdent indent | table | link image | codesample | preview code',
+#     'contextmenu': 'formats | link image',
+#     'menubar': False,
+#     'inline': False,
+#     'statusbar': True,
+#     'width': 'auto',
+#     'height': 360,
+# }
 
-TINYMCE_JS_URL = 'http://cdn.tinymce.com/4/tinymce.min.js'
+# TINYMCE_JS_URL = 'http://cdn.tinymce.com/4/tinymce.min.js'
 
 
 
@@ -171,6 +180,14 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 # Allauth
-ACCOUNT_FORMS = {'signup': 'users.forms.myForm'}
+# ACCOUNT_FORMS = {'signup': 'users.forms.myForm'}
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_REQUIRED=True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# ACCOUNT_EMAIL_VERIFICATION=False
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}

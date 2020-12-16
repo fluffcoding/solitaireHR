@@ -1,17 +1,20 @@
-{% extends 'base.html' %} {% block title %} {% endblock %} {% block content %}
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block title %} {% endblock %} {% block content %}
 <style>
   body {
     background-color: #f4f5f7;
   }
 </style>
 <div class="wrapper">
-    <div class="section-shaped">
+    <div class="section-shaped" style="background-image: url({% static 'assets/img/4214558.jpg' %}); background-size: cover; background-position: bottom;">
         <div class="shape shape-style-3 shape-default">
             <span class="span-150"></span>
             <span class="span-50"></span>
         </div>
         <div class="page-header">
-            <div class="container shape-container d-flex align-items-center py-lg">
+            <div class="container shape-container d-flex align-items-center py-lg" style="height:250px;">
                 <div class="col px-0">
                     <div class="row align-items-center justify-content-center">
                         <div class="col-lg-6 text-center"></div>
@@ -20,8 +23,13 @@
             </div>
         </div>
     </div>
-    {% block page %}
-    {% endblock page %}
+    <div class="section features-1 mt--9">
+        <div class="container">
+            <div class="card">
+                {% block normal_content %}{% endblock %}
+            </div>
+        </div>
     </div>
-    {% endblock content %}
-
+</div>
+{% block modal %}{% endblock %}
+{% endblock %}

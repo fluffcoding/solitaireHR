@@ -1,0 +1,21 @@
+<li class="nav-item">
+    <div class="dropdown">
+        <a style="font-size:14px; font-weight:400;" class="dropdown-toggle text-white dropleft" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{request.user.email}}
+            <span class="nav-link-inner--text badge badge-secondary text-primary" style="font-size:13px;">
+                {% if request.user.profile.is_jobseeker %}
+                Job Seeker
+                {% elif request.user.profile.is_employer %}
+                Employer
+                {% else %}
+                Profile unfinished
+                {% endif %}
+            </span>
+        </a>
+      
+        <div class="dropdown-menu mt-3" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item text-primary" href="{% url 'create_profile' %}">Profile</a>
+          <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+        </div>
+      </div>
+</li>

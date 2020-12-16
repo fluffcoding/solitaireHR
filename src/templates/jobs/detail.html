@@ -1,0 +1,73 @@
+{% extends 'norm_base.html' %} {% block title %} {% endblock %}
+{% load crispy_forms_tags %}
+
+                {% block normal_content %}
+<div class="p-5">
+    <h4>
+        {{job.job_designation}}
+        <span class="badge badge-primary">{{job.city}}, {{job.country}}</span>
+    </h4>
+    {% if user.is_authenticated %}
+    <button
+        class="btn btn-primary btn-lg float-right"
+        style="font-size:20px;"
+        data-toggle="modal"
+        data-target="#exampleModal"
+    >Apply</button>
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+        <p style="margin:0; font-size:20px;" class="text-center">
+            Please
+            <a href="{% url 'account_login' %}" class="badge-secondary p-2 rounded">login</a>
+            to apply
+        </p>
+    </div>
+    {% endif %}
+    <p>
+        {{job.job_type}}
+                        {{job.job_shift}}
+                        {{job.functional_area}}
+                        {{job.industry}}
+                        {{job.career_level}}
+                        {{job.experience}}
+                        {{job.salary_type}}
+                        {{job.minimum_salary}}
+                        {{job.max_salary}}
+                        {{job.gender}}
+    </p>
+    <p>{{job.job_description}}</p>
+</div>
+
+{% endblock %}
+{% block modal %}
+<div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Applying for {{job.job_designation}}</h5>
+                <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    {% csrf_token %}
+                {{form|crispy}}
+                    <button type="submit" class="btn btn-primary">Apply</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

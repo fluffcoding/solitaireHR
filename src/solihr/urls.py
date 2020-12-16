@@ -10,12 +10,14 @@ from hiring.views import mainHiring
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index),
+    path('', index, name='index'),
     path('jobs/', include('jobs.urls'), name='jobs'),
     path('accounts/', include('allauth.urls')),
     path('tinymce/', include('tinymce.urls')),
     path('cvwriting/', mainCV, name='cvwriting'),
     path('hiring/', mainHiring, name='hiring'),
+    path('api/', include('api.urls'), name='api'),
+    path('users/', include('users.urls'), name='users'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

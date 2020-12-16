@@ -881,3 +881,14 @@ class EmailVerificationSentView(TemplateView):
 
 
 email_verification_sent = EmailVerificationSentView.as_view()
+
+
+
+@login_required
+def profile_view(request):
+    if not request.user.profile.is_employer and not request.user.profile.is_jobseeker:
+        return redirect('create_profile')
+    elif request.user.profile.is_employer:
+        return redirect('employer_profile')
+    elif request.user.profile.is_jobseeker:
+        return redirect('jobseeker_profile')

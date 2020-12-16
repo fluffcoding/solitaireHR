@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% load i18n %}
 
 {% load crispy_forms_tags %}
@@ -8,7 +10,7 @@
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
-<section class="section section-shaped section-lg">
+<section class="section section-shaped section-lg"  style="background-image: url({% static 'assets/img/4214558.jpg' %}); background-size: cover; background-position: bottom;">
     <div class="shape shape-style-1 bg-gradient-default">
         <span></span>
         <span></span>
