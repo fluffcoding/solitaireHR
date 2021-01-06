@@ -12,8 +12,8 @@ from .forms import profileForm1, profileForm2, profileForm3, profileForm4, profi
 def profile_create(request):
     if not request.user.profile.is_jobseeker and not request.user.profile.is_employer:
         if request.method == 'POST':
-            print(request.POST)
-            print(request.POST.get('type'))
+            # print(request.POST)
+            # print(request.POST.get('type'))
             profile = get_object_or_404(Profile, user=request.user)
             profile.full_name = request.POST.get('full_name')
             profile.date_of_birth = request.POST.get('date_of_birth')
@@ -52,11 +52,11 @@ def profile_create(request):
                 profile.phone = request.POST.get('phone')
                 profile.address = request.POST.get('address')
                 profile.number_of_employees = request.POST.get('number_of_employees')
-                profile.industry = get_object_or_404(Industry, id=int(request.POST.get('industry')))
                 profile.operating_since = request.POST.get('operating since')
                 profile.save()
-                print(profile)
-                return redirect('index')
+                if request.POST.get('industry') != '' or None:
+                    profile.industry = get_object_or_404(Industry, id=int(request.POST.get('industry')))
+                return redirect('profile_redirect')
 
         form1 = profileForm1()
         form2 = profileForm2()
@@ -72,21 +72,39 @@ def profile_create(request):
         }
         return render(request, 'users/profile_create.html', context)
     elif request.user.profile.is_jobseeker:
-        print('Is Job Seeker')
-        return redirect('jobseeker_profile')
+        # print('Is Job Seeker')
+        return redirect('jobseeker_profile', request.user.id)
     elif request.user.profile.is_employer:
-        print('Is Employer')
-        return redirect('employer_profile')
+        # print('Is Employer')
+        return redirect('employer_profile', request.user.id)
 
 
+def profile_redirect(request):
+    if request.user.profile.is_jobseeker:
+        return redirect('jobseeker_profile', request.user.id)
+    elif request.user.profile.is_employer:
+        return redirect('employer_profile', request.user.id)
+    else:
+        return redirect('create_profile')
 
-def employer_profile(request):
-    jobs = Job.objects.all()
-    context = {
-        'jobs': jobs,
-    }
-    return render(request, 'account/employer_profile.html', context)
+
+def employer_profile(request, id):
+    user = User.objects.get(id=id)
+    if user.profile.is_employer:
+        jobs = Job.objects.filter(created_by=user)
+        context = {
+            'user': user,
+            'jobs': jobs,
+        }
+        return render(request, 'account/employer_profile.html', context)
+    else:
+        return redirect('jobseeker_profile', id=id)
 
 
-def jobseeker_profile(request):
-    return render(request, 'account/jobseeker_profile.html', {})
+def jobseeker_profile(request, id):
+    user = User.objects.get(id=id)
+    if user.profile.is_jobseeker:
+        return render(request, 'account/jobseeker_profile.html', {})
+    elif user.profile.is_employer:
+        return redirect('employer_profile', id=id)
+    

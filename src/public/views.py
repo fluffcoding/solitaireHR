@@ -29,7 +29,6 @@ def index(request):
 
 
     industries = Industry.objects.all()
-    print(request.POST)
     context = {
         'form': form,
         'industries': industries,

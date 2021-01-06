@@ -14,7 +14,10 @@ SECRET_KEY = 'dcvmqs2&%%ge#p#i6)d6sm1jit(+)#q5!pl(ds@0koxpw1japx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'solitairehr.pythonanywhere.com',
+    '127.0.0.1',
+]
 
 
 # Application definition
@@ -188,6 +191,6 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
-BOOTSTRAP4 = {
-    'include_jquery': True,
-}
+# BOOTSTRAP4 = {
+#     'include_jquery': True,
+# }

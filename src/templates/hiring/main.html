@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}
 {% endblock %}
 
 {% block content %}
 <div class="wrapper">
-  <div class="section section-hero section-shaped">
-    <div class="shape shape-style-3 shape-default">
+  <div class="section section-hero section-shaped" style="background-image: url({% static 'assets/img/4214558.jpg' %}); background-size: cover; background-position: bottom;">
+    <!-- <div class="shape shape-style-3 shape-default">
       <span class="span-150"></span>
       <span class="span-50"></span>
       <span class="span-50"></span>
@@ -17,16 +19,16 @@
       <span class="span-100"></span>
       <span class="span-50"></span>
       <span class="span-100"></span>
-    </div>
+    </div> -->
     <div class="page-header">
       <div class="container shape-container d-flex align-items-center py-lg">
         <div class="col px-0">
           <div class="row align-items-center justify-content-center">
-            <div class="col-lg-6 text-center">
-              <h1 class="text-white display-1">Hiring Solutions</h1>
-              <h2 class="display-4 font-weight-normal text-white">We're great at finding the best talent!</h2>
-              <div class="btn-wrapper mt-4">
-                <a href="#" class="btn btn-success btn-lg mt-3 mb-sm-0" style="font-size: 30px; font-weight: 100;">
+            <div class="col-lg-6 text-center p-4" style="background-color: rgba(23, 43, 77, 0.7);">
+              <h1 class="text-white display-1">Land more Jobs</h1>
+              <h2 class="display-4 font-weight-normal text-white">Hire a Resume Writer today!</h2>
+              <div class="btn-wrapper mt-3">
+                <a href="#" class="btn btn-secondary btn-lg mt-3 mb-sm-0" style="font-size: 30px; font-weight: 100;">
                   <!-- <span class="btn-inner--icon"><i class="ni ni-button-play"></i></span> -->
                   <span class="btn-inner--text">Lets start</span>
                 </a>

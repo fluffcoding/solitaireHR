@@ -1,56 +1,16 @@
-{% extends 'base.html' %}
+{% extends 'norm_base.html' %}
 
 {% load static %}
-{% block content %}
-
-<div class="wrapper">
-    <div class="section-shaped">
-        <div class="shape shape-style-3 shape-default">
-            <span class="span-150"></span>
-            <span class="span-50"></span>
-        </div>
-        <div class="page-header">
-            <div class="container shape-container d-flex align-items-center py-lg">
-                <div class="col px-0">
-                    <div class="row align-items-center justify-content-center">
-                        <div class="col-lg-6 text-center"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="section features-1 mt--8">
-        <div class="container">
-            <div class="container-fluid">
-                <div class="card p-4">
-                  <!-- <div class="row">
-                    <div class="col-2">
-                      <img src="https://media.idownloadblog.com/wp-content/uploads/2018/07/Apple-logo-black-and-white.png" width="80%">
-                    </div>
-                    <div class="col-10">
-                      <h1 style="margin:0 ;">Company Name</h1>
-                      <p>Karachi, Pakistan | Software House</p>
-                      <div class="float-right">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                          <li class="nav-item" role="presentation">
-                            <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
-                          </li>
-                          <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="job-tab" data-toggle="tab" href="#job" role="tab" aria-controls="job" aria-selected="false">Jobs</a>
-                          </li>
-                        </ul>
-                        
-                      </div>
-                    </div>
-                  </div> -->
-                      <h2 class="m-3">Jobs Dashboard</h2>
+{% block normal_content %}
+<div class="p-5">
+                      <h2 class="mb-4 mr-4 ml-5">Jobs Dashboard</h2>
                         {% for j in job_applications %}
-                        <div class="card mb-3 p-3" style="border: 1px solid #007bff; width: 100%">
+                        <div class="card mb-5 p-4 my-rounded shadow">
                             <a href="{% url 'jobs:detail' j.job.id %}">
                                 <h5>{{j.job.job_designation}}</h5>
                             </a>
 
-                            <p class="bg-secondary text-primary p-3 text-center" style="font-weight: 400;">Applied 
+                            <p class="bg-secondary text-primary p-3 text-center my-rounded" style="font-weight: 400;">Applied 
                                 <i class="ni ni-check-bold"></i>
                                 <span class="ml-5 text-gray">Shortlisted</span>
                                 <span class="ml-5 text-gray">Interviewed</span>
@@ -58,13 +18,5 @@
                             </p>
                         </div>
                         {% endfor %}
-                  </div>
-                </div>
-              </div>
-        </div>
-    </div>
-</div>
-
-
-
+                      </div>
     {% endblock %}

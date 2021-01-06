@@ -1,0 +1,39 @@
+{% extends 'norm_base.html' %}
+
+{% load static %}
+{% block normal_content %}
+<div class="p-5">
+                      <h2 class="mb-4 mr-4 ml-5">Job Applications</h2>
+                        {% for j in job_applications %}
+                        <div class="card mb-5 p-4 my-rounded shadow">
+                            <p>
+                                <a href="{% url 'jobseeker_profile' j.job_seeker.id %}">
+                                    {{j.job_seeker|capfirst}}
+                                </a> applied for the position
+                                <a href="{% url 'jobs:detail' j.job.id %}">
+                                    {{j.job.job_designation}}
+                                </a>
+                            </p>
+                            <p class="bg-secondary text-primary p-3 text-center my-rounded" style="font-weight: 400;">Applied 
+                                <i class="ni ni-check-bold"></i>
+                                <span class="ml-5 text-gray">Shortlisted</span>
+                                <span class="ml-5 text-gray">Interviewed</span>
+                                <span class="ml-5 text-gray">Selected</span>
+                            </p>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="card my-rounded bg-secondary border-0 p-3">
+                                        <p class="text-default">
+                                            Contact Information
+                                        </p>
+                                        <p>
+                                        Email: {{j.job_seeker.email}}<br>
+                                        Phone: {{j.job_seeker.profile.phone}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        {% endfor %}
+                      </div>
+    {% endblock %}

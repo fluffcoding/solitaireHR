@@ -18,6 +18,13 @@ class DateInput(forms.DateInput):
 
 
 class profileForm1(forms.ModelForm):
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.fields['date_of_birth'].required = True
+		self.fields['full_name'].required = True
+		self.fields['gender'].required = True
+		self.fields['mobile_phone'].required = True
+
 	class Meta:
 		model = Profile
 		fields = ('full_name',
@@ -32,6 +39,12 @@ class profileForm1(forms.ModelForm):
 
 
 class profileForm2(forms.ModelForm):
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.fields['country'].required = True
+		self.fields['city'].required = True
+		self.fields['address_line1'].required = True
+
 	class Meta:
 		model = Profile
 		fields = ('country',
@@ -43,6 +56,12 @@ class profileForm2(forms.ModelForm):
 
 
 class profileForm3(forms.ModelForm):
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.fields['preferred_job_city'].required = True
+		self.fields['expected_salary'].required = True
+
+
 	class Meta:
 		model = Profile
 		fields = ('preferred_job_designation',
@@ -52,6 +71,7 @@ class profileForm3(forms.ModelForm):
 
 
 class profileForm4(forms.ModelForm):
+	
 	class Meta:
 		model = Profile
 		fields = ('current_designation',
@@ -60,6 +80,14 @@ class profileForm4(forms.ModelForm):
 
 
 class profileForm5(forms.ModelForm):
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.fields['company'].required = True
+		self.fields['company_type'].required = True
+		self.fields['company_country'].required = True
+		self.fields['city'].required = True
+		self.fields['number_of_employees'].required = True
+
 	class Meta:
 		model = Profile
 		fields = ('company',

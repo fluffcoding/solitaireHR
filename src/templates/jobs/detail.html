@@ -9,13 +9,13 @@
     </h4>
     {% if user.is_authenticated %}
     <button
-        class="btn btn-primary btn-lg float-right"
+        class="btn btn-primary btn-lg float-right my-rounded"
         style="font-size:20px;"
         data-toggle="modal"
         data-target="#exampleModal"
     >Apply</button>
     {% else %}
-    <div class="alert alert-warning" role="alert">
+    <div class="alert alert-default my-rounded" role="alert">
         <p style="margin:0; font-size:20px;" class="text-center">
             Please
             <a href="{% url 'account_login' %}" class="badge-secondary p-2 rounded">login</a>
@@ -48,7 +48,7 @@
     aria-hidden="true"
 >
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content my-rounded">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Applying for {{job.job_designation}}</h5>
                 <button
@@ -61,10 +61,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post">
+                <form method="POST">
                     {% csrf_token %}
                 {{form|crispy}}
-                    <button type="submit" class="btn btn-primary">Apply</button>
+                    <button type="submit" class="btn btn-primary my-rounded">Apply</button>
                 </form>
             </div>
         </div>

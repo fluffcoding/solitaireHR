@@ -1,11 +1,22 @@
 {% load static %}
-
+{% load i18n %}
 
 
 <!DOCTYPE html>
 <html lang="en">
 
 {% include 'base_components/head.html' %}
+<style>
+  .my-rounded {
+      border-radius: 20px;
+  }
+  .my-rounded2 {
+      border-radius: 20px;
+      border-color: #172b4d;
+      border-width: 1px;
+
+  }
+</style>
 
 <body class="index-page">
     <!-- Navbar -->
@@ -16,6 +27,28 @@
     {% endblock %}
     {% include 'base_components/footer.html' %}
     </div>
+     <!-- Modal -->
+  <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            <p class="mt-3">{% trans 'Are you sure you want to sign out?' %}</p>
+            
+            <form method="post" action="{% url 'account_logout' %}">
+              {% csrf_token %}
+              {% if redirect_field_value %}
+              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+              {% endif %}
+              <button type="submit" class="btn btn-danger">{% trans 'Sign Out' %}</button>
+            </form>
+            
+        </div>
+      </div>
+    </div>
+  </div>
     <!--   Core JS Files   -->
     {% include 'base_components/scripts.html' %}
 </body>
