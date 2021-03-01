@@ -17,6 +17,10 @@
                                 <span class="ml-5 text-gray">Selected</span>
                             </p>
                         </div>
+                        {% empty %}
+                        <p>You have not applied for any positions. To start applying, view jobs
+                            <a href="{% url 'jobs:all' %}">here</a>.
+                        </p>
                         {% endfor %}
                       </div>
     {% endblock %}

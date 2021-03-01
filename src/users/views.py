@@ -1,10 +1,18 @@
 from jobs.models import Job, Industry
 
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import User, Profile
+from .models import User, Profile, JobSeekerProfile, Projects, Reference
 
 from django.contrib.auth.decorators import login_required
-from .forms import profileForm1, profileForm2, profileForm3, profileForm4, profileForm5
+from .forms import (profileForm1
+, profileForm2
+, profileForm3
+, profileForm4
+, profileForm5
+, profileForm6
+, jobSeekerForm
+, ProjectsForm
+,ReferenceForm)
 
 
 
@@ -52,7 +60,10 @@ def profile_create(request):
                 profile.phone = request.POST.get('phone')
                 profile.address = request.POST.get('address')
                 profile.number_of_employees = request.POST.get('number_of_employees')
-                profile.operating_since = request.POST.get('operating since')
+                profile.operating_since = request.POST.get('operating_since')
+                profile.contact_person = request.POST.get('contact_person')
+                profile.contact_person_phone = request.POST.get('contact_person_phone')
+                profile.contact_person_official_email = request.POST.get('contact_person_official_email')
                 profile.save()
                 if request.POST.get('industry') != '' or None:
                     profile.industry = get_object_or_404(Industry, id=int(request.POST.get('industry')))
@@ -63,12 +74,14 @@ def profile_create(request):
         form3 = profileForm3()
         form4 = profileForm4()
         form5 = profileForm5()
+        form6 = profileForm6()
         context = {
             'form1': form1,
             'form2': form2,
             'form3': form3,
             'form4': form4,
             'form5': form5,
+            'form6': form6,
         }
         return render(request, 'users/profile_create.html', context)
     elif request.user.profile.is_jobseeker:
@@ -104,7 +117,63 @@ def employer_profile(request, id):
 def jobseeker_profile(request, id):
     user = User.objects.get(id=id)
     if user.profile.is_jobseeker:
-        return render(request, 'account/jobseeker_profile.html', {})
+        job_seeker, created = JobSeekerProfile.objects.get_or_create(
+    profile=user.profile,
+)   
+        projects = Projects.objects.filter(job_seeker=job_seeker)
+        references = Reference.objects.filter(job_seeker=job_seeker)
+        if user == request.user:
+            summary_form = jobSeekerForm(instance=job_seeker)
+            project_form = ProjectsForm()
+            ref_form = ReferenceForm()
+            if request.method == 'POST':
+                if 'job_form' in request.POST:
+                    summary_form = jobSeekerForm(request.POST, instance=job_seeker)
+                    project_form = ProjectsForm()
+                    ref_form = ReferenceForm()
+
+                    if summary_form.is_valid():
+                        summary_form.save()
+                elif 'project' in request.POST:
+                    project_form = ProjectsForm(request.POST or None)
+                    summary_form = jobSeekerForm()
+                    ref_form = ReferenceForm()
+
+                    if project_form.is_valid():
+                        project = project_form.save(commit=False)
+                        project.job_seeker = job_seeker
+                        project.save()
+                elif 'ref' in request.POST:
+                    ref_form = ReferenceForm(request.POST or None)
+                    project_form = ProjectsForm()
+                    summary_form = jobSeekerForm()
+                    if ref_form.is_valid():
+                        reference = ref_form.save(commit=False)
+                        reference.job_seeker = job_seeker
+                        reference.save()
+                return redirect('jobseeker_profile', id=user.id)
+
+                    
+            context = {
+                'user': user,
+                'job_seeker': job_seeker,
+                'created': created,
+                'summary_form': summary_form,
+                'projects': projects,
+                'project_form': project_form,
+                'references': references,
+                'ref_form': ref_form
+                }
+        else:
+            context = {
+                'user': user,
+                'job_seeker': job_seeker,
+                'created': created,
+                'projects': projects,
+                'references': references,
+                # 'form': form,
+                }
+        return render(request, 'account/jobseeker_profile.html', context)
     elif user.profile.is_employer:
         return redirect('employer_profile', id=id)
     

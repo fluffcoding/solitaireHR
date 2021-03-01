@@ -30,116 +30,107 @@
 </style>
 {% endblock %}
                 {% block content %}
-
-                <div class="wizard-container">
-
-                    <div class="card wizard-card" data-color="azure" id="wizardProfile">
-                        <form action="." method="POST" enctype="multipart/form-data"> {% csrf_token %}
-                            <!--        You can switch " data-color="orange" "  with one of the next bright colors: "blue", "green", "orange", "red", "azure"          -->
-
-                            <div class="wizard-header text-center">
-                                <h3 class="wizard-title">Create your profile</h3>
+<div class="wizard-container">
+    <div class="card wizard-card" data-color="azure" id="wizardProfile">
+        <form action="." method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!--        You can switch " data-color="orange" "  with one of the next bright colors: "blue", "green", "orange", "red", "azure"          -->
+            <div class="wizard-header text-center">
+                <h3 class="wizard-title">Create your profile</h3>
+            </div>
+            <div class="wizard-navigation">
+                <div class="progress-with-circle">
+                    <div
+                        class="progress-bar"
+                        role="progressbar"
+                        aria-valuenow="1"
+                        aria-valuemin="1"
+                        aria-valuemax="3"
+                        style="width: 21%;"
+                    ></div>
+                </div>
+                <ul>
+                    <li>
+                        <a href="#account-type" data-toggle="tab">
+                            <div class="icon-circle">
+                                <i class="ti-check"></i>
                             </div>
-
-                            <div class="wizard-navigation">
-                                <div class="progress-with-circle">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="1"
-                                        aria-valuemax="3" style="width: 21%;"></div>
-                                </div>
-                                <ul>
-                                    <li>
-                                        <a href="#about" data-toggle="tab">
-                                            <div class="icon-circle">
-                                                <i class="ti-user"></i>
-                                            </div>
-                                            
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#details" data-toggle="tab">
-                                            <div class="icon-circle">
-                                                <i class="ti-location-pin"></i>
-                                            </div>
-                                            
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#account-type" data-toggle="tab">
-                                            <div class="icon-circle">
-                                                <i class="ti-check"></i>
-                                            </div>
-                                            
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#final" data-toggle="tab">
-                                            <div class="icon-circle">
-                                                <i class="ti-map"></i>
-                                            </div>
-                                            
-                                        </a>
-                                    </li>
-                                    
-                                </ul>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#final" data-toggle="tab">
+                            <div class="icon-circle">
+                                <i class="ti-map"></i>
                             </div>
-                            <div class="tab-content">
-                                <div class="tab-pane" id="about">
-                                    <div class="row">
-                                        <h5 class="info-text"> Please tell us more about yourself.</h5>
-                                        <div class="col-sm-10 col-sm-offset-1">
-                                            {{ form1|crispy }}
-
-                                        </div>
-                                    </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#about" data-toggle="tab">
+                            <div class="icon-circle">
+                                <i class="ti-user"></i>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#details" data-toggle="tab">
+                            <div class="icon-circle">
+                                <i class="ti-location-pin"></i>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane" id="account-type">
+                    <h5 class="info-text">Select Account Type</h5>
+                    <div class="row">
+                        <div class="col-sm-10 col-sm-offset-2">
+                            <div class="row">
+                                <div class="col-sm-4  col-sm-offset-2">
+                                    <h3>Employer</h3>
                                 </div>
-                                <div class="tab-pane" id="details">
-                                    <div class="row">
-                                        <h5 class="info-text"> Please tell us more about yourself.</h5>
-                                        <div class="col-sm-10 col-sm-offset-1">
-                                            {{ form2|crispy }}
-
-                                        </div>
-                                    </div>
+                                <div class="col-sm-4  col-sm-offset-0">
+                                    <h3>Job Seeker</h3>
                                 </div>
-                                <div class="tab-pane" id="account-type">
-                                    <h5 class="info-text">Select Account Type</h5>
-                                    <div class="row">
-                                        <div class="col-sm-10 col-sm-offset-2">
-                                            <div class="row">
-                                                <div class="col-sm-4  col-sm-offset-2">
-                                                    <h3>Employer</h3>
-                                                </div>
-                                                <div class="col-sm-4  col-sm-offset-0">
-                                                    <h3>Job Seeker</h3>
-                                                </div>
-                                            </div>
-                                            <div class="cc-selector text-center">
-                                                <input id="employer" type="radio" name="type" value="employer"
-                                                    v-model="type" />
-                                                <label class="drinkcard-cc employer" for="employer"></label>
-                                                <input id="jobseeker" type="radio" name="type" value="jobseeker"
-                                                    v-model="type" />
-                                                <label class="drinkcard-cc jobseeker" for="jobseeker"></label>
-                                            </div>
-                                            
-                                        </div>
-                                        <p class="text-center">
-                                            If you're looking for jobs, select job seeker. If you're looking to find employees for your company, select Employer.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="final">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <h5 class="info-text"> </h5>
-                                        </div>
-                                        <div class="col-sm-10 col-sm-offset-1">
-                                            <div v-if="type=='employer'">
-                                                {{form5|crispy}}
-                                            </div>
-                                            <div v-else-if="type=='jobseeker'">
+                            </div>
+                            <div class="cc-selector text-center">
+                                <input
+                                    id="employer"
+                                    type="radio"
+                                    name="type"
+                                    value="employer"
+                                    v-model="type"
+                                >
+                                <label class="drinkcard-cc employer" for="employer"></label>
+                                <input
+                                    id="jobseeker"
+                                    type="radio"
+                                    name="type"
+                                    value="jobseeker"
+                                    v-model="type"
+                                >
+                                <label class="drinkcard-cc jobseeker" for="jobseeker"></label>
+                            </div>
+                        </div>
+                        <p class="text-center">
+                            If you're looking for jobs, select job seeker. If you're looking to find employees for your company, select Employer.
+                        </p>
+                    </div>
+                </div>
+                <div class="tab-pane" id="final">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h5 class="info-text"></h5>
+                        </div>
+                        <div class="col-sm-10 col-sm-offset-1">
+                            <div v-if="type=='employer'">
+                                <p class="text-center">Enter your company information</p>
+                                {{form5|crispy}}
+                            </div>
+                            <div v-else-if="type=='jobseeker'">
+                                {{form4|crispy}}
                                                 {{form3|crispy}}
-                                                <div class="form-check mt-3 mb-3">
+                                <!-- <div class="form-check mt-3 mb-3">
                                                     <input class="form-check-input" type="checkbox" value="" v-model="workExperience" id="flexCheckChecked">
                                                     <label class="form-check-label" for="flexCheckChecked">
                                                       Do you have Work Experience?
@@ -147,42 +138,86 @@
                                                 </div>
                                                 <div v-show="workExperience">
                                                     {{form4|crispy}}
-                                                </div>
-
-                                            </div>
-                                            
-                                            <div v-else>
-                                                <p>
-                                                    Please select an account type first
-                                                </p>
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
+                                                </div> -->
                             </div>
-                            <div class="wizard-footer">
-                                <div class="pull-right">
-                                    <input type='button' class='btn btn-next btn-fill btn-info btn-wd' name='next'
-                                        value='Next' />
-                                    <input type='submit' class='btn btn-finish btn-fill btn-info btn-wd'
-                                        name='finish' value='Finish' />
-                                </div>
-
-                                <div class="pull-left">
-                                    <input type='button' class='btn btn-previous btn-default btn-wd' name='previous'
-                                        value='Previous' />
-                                </div>
-                                <div class="clearfix"></div>
+                            <div v-else>
+                                <p>
+                                    Please select an account type first
+                                </p>
                             </div>
-                        </form>
+                        </div>
                     </div>
-                </div> <!-- wizard container -->
+                </div>
+                <div class="tab-pane" id="about">
+                    <div class="row">
+                        <div v-if="type=='employer'">
+                            <h5 class="info-text"> Enter details of a contact person.</h5>
+                            <div class="col-sm-10 col-sm-offset-1">
+                                {{form6|crispy}}
+                            </div>
+                        </div>
+                        <div v-else-if="type=='jobseeker'">
+                            <h5 class="info-text"> Please tell us more about yourself.</h5>
+                            <div class="col-sm-10 col-sm-offset-1">
+                                {{ form1|crispy }}
+                            </div>
+                        </div>
+                        <div v-else>
+                            <p>
+                                Please select an account type first
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="details">
+                    <div class="row">
+                        <div v-if="type=='employer'">
+                            <h5 class="info-text"> Welcome to Solitaire HR. We will help you get the best employees. Click finish to complete your profile.</h5>
+                        </div>
+                        <div v-else-if="type=='jobseeker'">
+                            <h5 class="info-text"> Please tell us more about yourself.</h5>
+                            <div class="col-sm-10 col-sm-offset-1">
+                                {{ form2|crispy }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div><!-- end row -->
-    </div> <!--  big container -->
+            <div class="wizard-footer">
+                <div class="pull-right">
+                    <input
+                        type="button"
+                        class="btn btn-next btn-fill btn-info btn-wd"
+                        name="next"
+                        value="Next"
+                    >
+                    <input
+                        type="submit"
+                        class="btn btn-finish btn-fill btn-info btn-wd"
+                        name="finish"
+                        value="Finish"
+                    >
+                </div>
+                <div class="pull-left">
+                    <input
+                        type="button"
+                        class="btn btn-previous btn-default btn-wd"
+                        name="previous"
+                        value="Previous"
+                    >
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- wizard container -->
+</div>
+</div>
+<!-- end row -->
+</div>
+<!--  big container -->
 </body>
-
 <script>
     var app = new Vue({
         delimiters: ['[[', ']]'],

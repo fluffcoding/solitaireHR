@@ -1,0 +1,127 @@
+{% extends "norm_base.html" %}
+
+{% block normal_content %}
+<div class="p-5">
+<h2 class="mb-4 mr-4 ml-3">Job Applications</h2>
+<!-- <p class="ml-3">Click the checkbox to confirm job seeker's progress</p> -->
+                        {% for j in jobApplications %}
+                        <div class="card mb-5 p-4 my-rounded shadow">
+                            <a href="#">
+                                
+                                <h5>
+                                    <a href="{% url 'jobseeker_profile' j.job_seeker.id %}">
+                                        {{j.job_seeker.profile.full_name}}
+                                    </a> applied for 
+                                    <a href="{% url 'jobs:detail' j.job.id %}">
+                                        {{j.job.job_designation}}
+                                    </a>
+                                </h5>
+                                <p style="margin: 0;">View Job Seeker's profile by 
+                                    <a href="{% url 'jobseeker_profile' j.job_seeker.id %}">
+                                        clicking here
+                                    </a>.</p>
+                            </a>
+                            <p>
+                                <span class="badge badge-warning">
+                            Minimum Salary: {{j.expected_salary_minimum}} PKR
+                                </span>
+                                <span class="badge badge-danger">
+                                    Maximum Salary:     {{j.expected_salary_maximum}} PKR
+                                        </span>
+                            </p>
+                            {% if j.is_rejected %}
+                            <p class="bg-warning text-white p-3 text-center my-rounded" style="font-weight: 400;">
+                                Application has been rejected.
+                            </p>
+                            {% else %}
+                            <!-- <form method="post">                                    {% csrf_token %} -->
+                            {% if j.selected %}
+                            <p class="bg-success text-white p-3 text-center my-rounded">
+                            {% else %}
+                            <p class="bg-secondary text-primary p-3 text-center my-rounded">
+
+                            {% endif %}
+                            {% if j.applied %}
+                                <span class="ml-3" style="font-weight: 400;">
+                                    Applied
+                                </span> 
+                                <i class="ni ni-check-bold"></i>
+                            {% else %}
+                                <span class="pl-3 text-gray">
+                                    Applied
+                                </span>
+                            {% endif %}
+                            {% if j.shortlisted %}
+                            <span class="pl-3" style="font-weight: 400;">
+                                Shortlisted
+                            </span> 
+                            <i class="ni ni-check-bold"></i>
+                        {% else %}
+                            <span class="pl-3 text-gray">
+                                Shortlisted
+                                <!-- <input type="hidden" name="upgrade" value="shortlist">    
+                                <input type="hidden" name="shortlisted" value="{{j.id}}">
+
+                                    <button type="submit" class="btn btn-link text-warning ml--3" style="font-size: 25px;">
+                                        <i class="ni ni-check-bold"></i>
+                                    </button> -->
+                                                            </span>
+                        {% endif %}
+                        {% if j.interviewed %}
+                                <span class="pl-3" style="font-weight: 400;">
+                                    Interviewed
+                                </span> 
+                                <i class="ni ni-check-bold"></i>
+                            {% else %}
+                                <span class="pl-3 text-gray">
+                                    Interviewed
+                                </span>
+                            {% endif %}
+                            {% if j.selected %}
+                                <span class="pl-3" style="font-weight: 400;">
+                                    Selected
+                                </span> 
+                                <i class="ni ni-check-bold"></i>
+                            {% else %}
+                                <span class="pl-3 text-gray">
+                                    Selected
+                                </span>
+                            {% endif %}
+
+                            </p>
+                        <!-- </form> -->
+                            {% endif %}
+                            <div>
+                                {% if j.is_accepted %}
+
+                                {% elif j.is_rejected %}
+                                <form method="post" style="all: unset;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id" value="{{j.id}}"/>
+                                    <button type="submit" class="btn btn-default my-rounded" name="unreject">Unreject</button>
+                                    
+                                </form>
+                                {% else %}
+                                <form method="post" style="all: unset;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id" value="{{j.id}}"/>
+                                    <button type="submit" class="btn btn-default my-rounded" name="progress">Confirm Progress</button>
+                                    
+                                </form>
+                                <form method="post" style="all: unset;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id" value="{{j.id}}"/>
+                                    <button class="btn btn-warning my-rounded" type="submit" name="reject">Reject</button>
+
+                                </form>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        {% empty %}
+                        <p>You have no job applications.</p>
+                        {% endfor %}
+                      </div>
+
+</div>
+{% endblock %}

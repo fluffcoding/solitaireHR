@@ -46,7 +46,7 @@ choices = {
     'degree_level': [('Non-matriculation','Non-matriculation'), ('Matriculation/O-level', 'Matriculation/O-level'), ('Intermediate/A-level','Intermediate/A-level'), ('Bachelors', 'Bachelors'), ('Masters', 'Masters'), ('MPhil/MS', 'MPhil/MS'), ('PhD/Doctorate', 'PhD/Doctorate'),('Certification','Certification'), ('Diploma', 'Diploma'), ('Short Course', 'Short Course')],
     'company_type': [('Sole Proprietarship', 'Sole Proprietarship'), ('Public', 'Public'), ('Private', 'Private'), ('NGO', 'NGO')],
     'number_of_employees': [( '1-10', '1-10'), ( '11-50', '11-50'), ( '51-200', '51-200'),('201-500', '201-500'),('500+', '500+')],
-    
+    'reference_type': [('Personal', 'Personal'), ('Professional', 'Professional')]
 }
 
 
@@ -85,7 +85,7 @@ class Job(models.Model):
     job_type = models.CharField(max_length=50, choices=choices['job_type'], null=True)
     city = models.CharField(max_length=50, choices=choices['city'])
     job_shift = models.CharField(max_length=50, choices=choices['job_shift'], null=True)
-    functional_area = models.ForeignKey(FunctionalArea, on_delete=models.CASCADE)
+    functional_area = models.ForeignKey(FunctionalArea, on_delete=models.CASCADE, null=True, blank=True)
     industry = models.ForeignKey(Industry, on_delete=models.CASCADE)
     # career_level = models.ForeignKey(CareerLevel, on_delete=models.CASCADE)
     career_level = models.CharField(max_length=50, choices=choices['career_level'], null=True)
@@ -109,4 +109,14 @@ class JobApplication(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
 
+    def is_rejected(self):
+        if self.applied == False or self.shortlisted == False or self.interviewed == False or self.selected == False:
+            return True
+        else:
+            return False
     
+    def is_accepted(self):
+        if self.applied == True and self.shortlisted == True and self.interviewed == True and self.selected == True:
+            return True
+        else:
+            return False

@@ -4,7 +4,7 @@ from users.forms import myForm
 
 from .forms import ContactForm
 
-from jobs.models import Industry
+from jobs.models import Industry, choices
 
 from django.contrib import messages
 
@@ -33,6 +33,7 @@ def index(request):
         'form': form,
         'industries': industries,
         'contact_form': contact_form,
+        'cities': choices['city']
     }
     # if form.is_valid():
     #     form.save(request)

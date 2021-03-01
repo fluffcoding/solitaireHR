@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 from django.http import HttpResponse
-from .models import Job, Industry, JobApplication
+from .models import Job, Industry, JobApplication, choices
 
 from .forms import JobForm, JobApplicationForm
 
@@ -36,7 +36,10 @@ def jobs_by_industry(request, id):
 def job_detail(request, id):
     job = Job.objects.get(id=id)
     form = JobApplicationForm(request.POST or None)
-    
+    if request.user.profile.job_seeker:
+        can_apply = True
+    else:
+        can_apply = False
     if form.is_valid():
         form.cleaned_data['job_seeker'] = request.user
         form.cleaned_data['job'] = job
@@ -49,6 +52,7 @@ def job_detail(request, id):
     context = {
         'job': job,
         'form': form,
+        'can_apply': can_apply,
     }
     return render(request, 'jobs/detail.html', context)
 
@@ -86,6 +90,7 @@ def search(request):
         qs = qs.filter(city__icontains=location)
     context = {
         'jobs': qs,
+        'cities': choices['city'],
     }
     return render(request, 'jobs/all.html', context)
 

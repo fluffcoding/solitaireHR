@@ -3,11 +3,19 @@
 {% block normal_content %}
 
 <div class="pb-5 pt-2 pl-4 pr-4">
-    <div class="pt-3 pl-3">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb my-rounded shadow-sm m-3">
+          <li class="breadcrumb-item text-default"><a href="/">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Jobs</a></li>
+        </ol>
+      </nav>
+    <div class="">
         {% if industry %}
-        <h3 style="font-weight: 100;">
-        <span style="font-size: 20px;">Functional Area: </span>
-        {{industry.name}}</h3>
+        <div class="card my-rounded pr-5 pl-4 m-3 bg-secondary shadow">
+            <h3 style="font-weight: 100;">
+                <span style="font-size: 20px;">Functional Area: {{industry.name}}</span>
+                </h3>
+        </div>
     {% endif %}
     </div>
     <div class="row">
@@ -43,13 +51,18 @@
                     <div class="card-body">
                         <p class="text-primary" style="font-weight: 600; font-size: 16px;">City</p>
                         <div class="form-group">
-                            <input type="text" placeholder="Regular" name="location" class="form-control my-rounded mt-3">
+                            <input  name='location' type="text" class="form-control my-rounded mt-3" placeholder="Location" list="datalistOptions" id="exampleDataList">
+                                                <datalist id="datalistOptions">
+                                                    {% for city in cities %}
+                                                    <option value="{{city.1}}">
+                                                    {% endfor %}
+                                                </datalist>
                         </div>
                     </div>
                 </div>
                 <div class="card m-3 shadow bg-secondary my-rounded">
                     <div class="card-body">
-                        <p class="text-primary" style="font-weight: 600; font-size: 16px;">Functional Area</p>
+                        <p class="text-primary" style="font-weight: 600; font-size: 16px;">Job Designation</p>
                         <div class="form-group">
                             <input type="text" placeholder="Regular" name="query" class="form-control my-rounded mt-3">
                         </div>
@@ -71,7 +84,7 @@
                         {{job.city}}, {{job.country}}
                         <span class="float-right">
                             <i class="far fa-clock" style="opacity: 60%"></i>
-                            {{job.created_at|date}}
+                            {{job.created_at|timesince}} ago
                         </span
         >
                     </p>
@@ -90,13 +103,13 @@
                         {{job.job_description|truncatechars:170}}
                     </p>
 
-                    <p class="mb-3" style="margin:0; font-size:15px;">
+                    <!-- <p class="mb-3" style="margin:0; font-size:15px;">
                         <span class="mr-2 ml-3 badge badge-primary">
                             Core PHP
                         </span>
                         <span class="mr-2 badge badge-primary">
                             Javascript
-                        </span></p>
+                        </span></p> -->
                 </div>
                 
             </div>

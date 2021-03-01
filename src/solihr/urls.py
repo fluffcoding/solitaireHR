@@ -17,6 +17,7 @@ urlpatterns = [
     path('cvwriting/', mainCV, name='cvwriting'),
     path('hiring/', mainHiring, name='hiring'),
     path('api/', include('api.urls'), name='api'),
+    path('hiring/', include('hiring.urls'), name='hiring'),
     path('users/', include('users.urls'), name='users'),
 ]
 if settings.DEBUG:

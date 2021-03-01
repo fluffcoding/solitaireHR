@@ -57,8 +57,15 @@ Solitaire HR - Home Page
                                         </div>
                                         <div class="col-4">
                                             <div class="form-group">
-                                                <input name='location' type="text" class="form-control my-rounded2" placeholder="Location" style="border: 1px solid  rgb(23, 43, 77);">
+                                                <!-- <input name='location' type="text" class="form-control my-rounded2" placeholder="Location" style="border: 1px solid  rgb(23, 43, 77);"> -->
+                                                <input  name='location' type="text" class="form-control my-rounded2" placeholder="Location" style="border: 1px solid  rgb(23, 43, 77);" list="datalistOptions" id="exampleDataList">
+                                                <datalist id="datalistOptions">
+                                                    {% for city in cities %}
+                                                    <option value="{{city.1}}">
+                                                    {% endfor %}
+                                                </datalist>
                                             </div>
+
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-outline-default btn-block my-rounded">Search</button>
@@ -104,12 +111,11 @@ Solitaire HR - Home Page
             </div>
         </div>
     </div>
-    <div class="text-center p-3">
+    <!-- <div class="text-center p-3">
         <h3>Companies currently hiring in Pakistan</h3>
-        {% include 'components/carousel.html' %}
         
-    </div>
-    <div class="container" style="font-size: 25px; ">
+    </div> -->
+    <div class="container mt-4" style="font-size: 20px; ">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <a

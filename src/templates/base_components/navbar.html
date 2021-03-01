@@ -2,7 +2,7 @@
 
 
 <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light headroom">
-    <div class="container rounded" style="max-width: 100%; background-color: rgb(23, 43, 77, 0.7);">
+    <div class="container rounded" style="max-width: 100%; background-color: rgb(23, 43, 77, 0.8);">
         <a class="navbar-brand ml-5 mr-lg-5" href="/" style="font-size: 24px;">
             solitaire hr
         </a>
@@ -35,7 +35,7 @@
         </a>
         <div class="dropdown-menu dropdown-menu-xl">
           <div class="dropdown-menu-inner">
-            <a href="#" class="media d-flex align-items-center">
+            <a href="{% url 'jobs:all' %}" class="media d-flex align-items-center">
               <div class="icon icon-shape bg-gradient-primary rounded-circle text-white">
                 <i class="ni ni-spaceship"></i>
               </div>
@@ -44,7 +44,7 @@
                 <p class="description d-none d-md-inline-block mb-0">Browse all sorts of jobs, find ones which suit you best.</p>
               </div>
             </a>
-            <a href="#" class="media d-flex align-items-center">
+            <!-- <a href="#" class="media d-flex align-items-center">
               <div class="icon icon-shape bg-gradient-success rounded-circle text-white">
                 <i class="ni ni-palette"></i>
               </div>
@@ -52,7 +52,7 @@
                 <h6 class="heading text-primary mb-md-1">Jobs by Category</h6>
                 <p class="description d-none d-md-inline-block mb-0">Browse jobs by category. Find your favorite jobs.</p>
               </div>
-            </a>
+            </a> -->
           </div>
         </div>
       </li>
@@ -64,13 +64,13 @@
           </span>
         </a>
       </li>
-      <li class="nav-item dropdown">
+      <!-- <li class="nav-item dropdown">
         <a href="{% url 'hiring' %}" class="nav-link" role="button">
           <i class="ni ni-collection d-lg-none"></i>
           <span class="nav-link-inner--text">Hiring Solutions
           </span>
         </a>
-      </li>
+      </li> -->
     </ul>
     <ul class="navbar-nav align-items-lg-center ml-lg-auto">
       <li class="nav-item">
@@ -119,7 +119,7 @@
                 <p class="description d-none d-md-inline-block mb-0">Browse all sorts of jobs, find ones which suit you best.</p>
               </div>
             </a>
-            <a href="#" class="media d-flex align-items-center">
+            <!-- <a href="#" class="media d-flex align-items-center">
               <div class="icon icon-shape bg-gradient-success rounded-circle text-white">
                 <i class="ni ni-palette"></i>
               </div>
@@ -127,7 +127,7 @@
                 <h6 class="heading text-primary mb-md-1">Jobs by Category</h6>
                 <p class="description d-none d-md-inline-block mb-0">Browse jobs by category. Find your favorite jobs.</p>
               </div>
-            </a>
+            </a> -->
           </div>
         </div>
       </li>
@@ -135,13 +135,6 @@
         <a href="{% url 'profile_redirect' %}" class="nav-link" role="button">
           <i class="ni ni-collection d-lg-none"></i>
           <span class="nav-link-inner--text">Profile
-          </span>
-        </a>
-      </li>
-      <li class="nav-item dropdown">
-        <a href="#" class="nav-link" role="button">
-          <i class="ni ni-collection d-lg-none"></i>
-          <span class="nav-link-inner--text">Resume
           </span>
         </a>
       </li>
@@ -174,7 +167,7 @@
         </a>
       </li>
       <li class="nav-item dropdown">
-        <a href="{% url 'cvwriting' %}" class="nav-link" role="button">
+        <a href="{% url 'hiring' %}" class="nav-link" role="button">
           <i class="ni ni-collection d-lg-none"></i>
           <span class="nav-link-inner--text">Hiring Solutions
           </span>
@@ -200,7 +193,7 @@
         </a>
         <div class="dropdown-menu dropdown-menu-xl">
           <div class="dropdown-menu-inner">
-            <a href="#" class="media d-flex align-items-center">
+            <a href="{% url 'jobs:all' %}" class="media d-flex align-items-center">
               <div class="icon icon-shape bg-gradient-primary rounded-circle text-white">
                 <i class="ni ni-spaceship"></i>
               </div>
@@ -209,7 +202,7 @@
                 <p class="description d-none d-md-inline-block mb-0">Browse all sorts of jobs, find ones which suit you best.</p>
               </div>
             </a>
-            <a href="#" class="media d-flex align-items-center">
+            <!-- <a href="#" class="media d-flex align-items-center">
               <div class="icon icon-shape bg-gradient-success rounded-circle text-white">
                 <i class="ni ni-palette"></i>
               </div>
@@ -217,7 +210,7 @@
                 <h6 class="heading text-primary mb-md-1">Jobs by Category</h6>
                 <p class="description d-none d-md-inline-block mb-0">Browse jobs by category. Find your favorite jobs.</p>
               </div>
-            </a>
+            </a> -->
           </div>
         </div>
       </li>

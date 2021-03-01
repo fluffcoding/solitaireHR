@@ -3,41 +3,87 @@
 
                 {% block normal_content %}
 <div class="p-5">
-    <h4>
-        {{job.job_designation}}
-        <span class="badge badge-primary">{{job.city}}, {{job.country}}</span>
-    </h4>
-    {% if user.is_authenticated %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb my-rounded mb-4 shadow-sm">
+          <li class="breadcrumb-item text-default"><a href="/">Home</a></li>
+          <li class="breadcrumb-item text-default"><a href="{% url 'jobs:all' %}">Jobs</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{job.job_designation}}</li>
+        </ol>
+      </nav>
+    {% if user.profile.job_seeker %}
     <button
-        class="btn btn-primary btn-lg float-right my-rounded"
-        style="font-size:20px;"
+        class="btn btn-default my-rounded btn-lg float-right pl-5 pr-5"
+        style="font-size:25px;"
         data-toggle="modal"
         data-target="#exampleModal"
     >Apply</button>
+    {% elif user.profile.is_employer %}
+    <div class="alert alert-default my-rounded" role="alert">
+        <p style="margin:0; font-size:20px;" class="text-center">
+            Employers cant apply
+        </p>
+    </div>
     {% else %}
     <div class="alert alert-default my-rounded" role="alert">
         <p style="margin:0; font-size:20px;" class="text-center">
             Please
             <a href="{% url 'account_login' %}" class="badge-secondary p-2 rounded">login</a>
-            to apply
+            to apply or finish your profile.
         </p>
     </div>
     {% endif %}
-    <p>
-        {{job.job_type}}
-                        {{job.job_shift}}
-                        {{job.functional_area}}
-                        {{job.industry}}
-                        {{job.career_level}}
-                        {{job.experience}}
-                        {{job.salary_type}}
-                        {{job.minimum_salary}}
-                        {{job.max_salary}}
-                        {{job.gender}}
+    <p class="text-default" style="margin: 0; font-weight: 500">Job Designation: </p>
+    <h2 style="margin: 0;">
+        {{job.job_designation}}
+        <span class="badge badge-default my-rounded pl-3 pr-3">{{job.city}}, {{job.country}}</span>
+    </h2>
+    <h5 style="margin: 0;">
+        {{job.created_by.profile.company}} | {{job.created_by.profile.city}},{{job.created_by.profile.company_country}}
+    </h5>
+    <p style="font-size: 25px; margin: 0;">
+        <span class="badge badge-warning my-rounded pl-3 pr-3">
+            Minimum Salary: {{job.minimum_salary}} PKR
+        </span>
+        <span class="badge badge-danger my-rounded pl-3 pr-3">
+            Maximum Salary:     {{job.max_salary}} PKR
+        </span>
+        <span class="badge badge-warning my-rounded pl-3 pr-3">
+            Salary Type: {{job.salary_type}}
+        </span>
     </p>
-    <p>{{job.job_description}}</p>
+    <div class="row mt-3">
+        <div class="col-6" style="border-right: 4px solid #172b4d;">
+            <p>{{job.job_description}}</p>
+            
+        </div>
+        <div class="col-6">
+            <p style="font-size: 25px;">
+                <span class="badge badge-secondary">
+                    Job Type: {{job.job_type}}
+                </span><br>
+                <span class="badge badge-warning">
+                    Experience Required: {{job.experience}}
+                </span><br>
+                <span class="badge badge-secondary">
+                    Job Shift: {{job.job_shift}}
+                </span><br>
+                <span class="badge badge-secondary">
+                    Functional Area: {{job.functional_area}}
+                </span><br>
+                <span class="badge badge-secondary">
+                    Industry: {{job.industry}}
+                </span><br>
+                <span class="badge badge-warning">
+                    Career Level: {{job.career_level}}
+                </span><br>
+                <span class="badge badge-danger">
+                    Gender preference: {{job.gender}}
+                </span>
+            </p>
+        </div>
+    </div>
+    
 </div>
-
 {% endblock %}
 {% block modal %}
 <div
@@ -64,7 +110,7 @@
                 <form method="POST">
                     {% csrf_token %}
                 {{form|crispy}}
-                    <button type="submit" class="btn btn-primary my-rounded">Apply</button>
+                    <button type="submit" class="btn btn-default my-rounded">Apply</button>
                 </form>
             </div>
         </div>

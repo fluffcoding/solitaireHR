@@ -889,6 +889,6 @@ def profile_view(request):
     if not request.user.profile.is_employer and not request.user.profile.is_jobseeker:
         return redirect('create_profile')
     elif request.user.profile.is_employer:
-        return redirect('employer_profile')
+        return redirect('employer_profile', request.user.id)
     elif request.user.profile.is_jobseeker:
-        return redirect('jobseeker_profile')
+        return redirect('jobseeker_profile', request.user.id)
