@@ -10,7 +10,7 @@
           <li class="breadcrumb-item active" aria-current="page">{{job.job_designation}}</li>
         </ol>
       </nav>
-    {% if user.profile.job_seeker %}
+    {% if user.profile.is_jobseeker %}
     <button
         class="btn btn-default my-rounded btn-lg float-right pl-5 pr-5"
         style="font-size:25px;"

@@ -12,18 +12,19 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
 def jobs_view(request):
-    jobs = Job.objects.all()
+    jobs = Job.objects.all().order_by("-id")
     # myFilter = JobFilter(request.GET, queryset=jobs)
     # jobs = myFilter.qs
     context = {
         'jobs': jobs,
+        'cities': choices['city'],
         # 'myFilter': myFilter,
     }
     return render(request, 'jobs/all.html', context)
 
 
 
-def jobs_by_industry(request, id):
+def jobs_by(request, id):
     industry = Industry.objects.get(id=id)
     jobs = Job.objects.filter(industry=industry)
     context = {
@@ -36,10 +37,10 @@ def jobs_by_industry(request, id):
 def job_detail(request, id):
     job = Job.objects.get(id=id)
     form = JobApplicationForm(request.POST or None)
-    if request.user.profile.job_seeker:
-        can_apply = True
-    else:
-        can_apply = False
+    # if request.user.profile.job_seeker:
+    #     can_apply = True
+    # else:
+    #     can_apply = False
     if form.is_valid():
         form.cleaned_data['job_seeker'] = request.user
         form.cleaned_data['job'] = job
@@ -52,23 +53,26 @@ def job_detail(request, id):
     context = {
         'job': job,
         'form': form,
-        'can_apply': can_apply,
+        # 'can_apply': can_apply,
     }
     return render(request, 'jobs/detail.html', context)
 
 
 @login_required
 def create_jobs(request):
-    form = JobForm(request.POST or None)
-    if form.is_valid():
-        form.cleaned_data['created_by'] = request.user
-        job = Job(**form.cleaned_data)
-        job.save()
-        return redirect('jobs:all')
-    context = {
-        'form': form,
-    }
-    return render(request, 'jobs/create.html', context)
+    if request.user.profile.is_employer:
+        form = JobForm(request.POST or None)
+        if form.is_valid():
+            form.cleaned_data['created_by'] = request.user
+            job = Job(**form.cleaned_data)
+            job.save()
+            return redirect('jobs:all')
+        context = {
+            'form': form,
+        }
+        return render(request, 'jobs/create.html', context)
+    else:
+        return HttpResponse('<h3>You are not registered as an employer, <a href="/">Return to Home</a>')
     
 
 @login_required
@@ -81,7 +85,7 @@ def my_jobs(request):
 
 
 def search(request):
-    qs = Job.objects.all()
+    qs = Job.objects.all().order_by('-id')
     data = request.GET.get('query')
     location = request.GET.get('location')
     if data != '' and data is not None:

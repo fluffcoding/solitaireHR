@@ -8,7 +8,6 @@ Solitaire HR - Home Page
 {% endblock %}
 
 {% block content %}
-
 <!-- <div class="alert alert-warning alert-dismissible fade show" role="alert" style="position: absolute;">
     <strong>Holy guacamole!</strong> You should check in on some of those fields below.
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -32,16 +31,24 @@ Solitaire HR - Home Page
         <div class="page-header">
             {% if user.is_authenticated and not user.profile.is_jobseeker and not user.profile.is_employer %}
             <div class="alert alert-default alert-dismissible fade show ml-5 mr-5 mt-4" role="alert">
-                <strong>You have not selected a user type.</strong> You will not be able to access several features. Click 
+                <strong>You have not selected a user type.</strong>
+                You will not be able to access several features. Click
                 <a href="{% url 'create_profile' %}" class="text-white">
                     <u>
                         here
-                    </u></a> to finish your profile.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
+                    </u>
+                </a>
+                to finish your profile.
+                <button
+                    type="button"
+                    class="close"
+                    data-dismiss="alert"
+                    aria-label="Close"
+                >
+                    <span aria-hidden="true">&times;</span>
                 </button>
-              </div>
-              {% endif %}
+            </div>
+            {% endif %}
             <div class="container shape-container d-flex align-items-center">
                 <div class="col px-0">
                     <div class="row align-items-center justify-content-center">
@@ -52,139 +59,185 @@ Solitaire HR - Home Page
                                     <div class="row">
                                         <div class="col-8">
                                             <div class="form-group">
-                                                <input name='query' type="text" class="form-control text-default my-rounded2" placeholder="What are you looking for?" style="border: 1px solid  rgb(23, 43, 77);">
+                                                <input
+                                                    name="query"
+                                                    type="text"
+                                                    class="form-control text-default my-rounded2"
+                                                    placeholder="What are you looking for?"
+                                                    style="border: 1px solid  rgb(23, 43, 77);"
+                                                >
                                             </div>
                                         </div>
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <!-- <input name='location' type="text" class="form-control my-rounded2" placeholder="Location" style="border: 1px solid  rgb(23, 43, 77);"> -->
-                                                <input  name='location' type="text" class="form-control my-rounded2" placeholder="Location" style="border: 1px solid  rgb(23, 43, 77);" list="datalistOptions" id="exampleDataList">
+                                                <input
+                                                    name="location"
+                                                    type="text"
+                                                    class="form-control my-rounded2"
+                                                    placeholder="Location"
+                                                    style="border: 1px solid  rgb(23, 43, 77);"
+                                                    list="datalistOptions"
+                                                    id="exampleDataList"
+                                                >
                                                 <datalist id="datalistOptions">
                                                     {% for city in cities %}
                                                     <option value="{{city.1}}">
-                                                    {% endfor %}
-                                                </datalist>
+                                                        {% endfor %}
+                                                    </datalist>
+                                                </div>
                                             </div>
-
                                         </div>
-                                    </div>
-                                    <button type="submit" class="btn btn-outline-default btn-block my-rounded">Search</button>
-                                </form>
-                                
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12 col-sm-12">
-                            {% if not user.is_authenticated %}
-                            <div class="">
-                                <h3 class="text-white mt-5 text-center">Register as </h3>
-                                <a href="{% url 'account_signup' %}" type="button" class="btn btn-secondary btn-block btn-lg my-rounded" style="font-size:25px;" data-toggle="tooltip" data-placement="right" title="Find your dream job!">
-                                    Job Seeker
-                                </a>
-                                  <a  href="{% url 'account_signup' %}" type="button" class="btn btn-secondary btn-block btn-lg my-rounded" style="font-size:25px;" data-toggle="tooltip" data-placement="right" title="Get the best employees!">
-                                    Employer
-                                  </a>
-                            </div>
-                            {% elif user.is_authenticated and not user.profile.is_jobseeker and not user.profile.is_employer %}
-                            <a href="{% url 'create_profile' %}">
-                            <button type="button" class="btn btn-secondary btn-block btn-lg my-rounded" style="font-size:25px;">
-                                Click here to finish your profile
-                              </button>
-                            </a>
-                            {% elif user.profile.is_jobseeker %}
-                            <div class="mt-5">
-                                <button type="button" class="btn btn-secondary btn-block btn-lg" style="font-size:25px;"  data-toggle="tooltip" data-placement="right" title="We'll help you find the perfect job">
-                                    Start Applying!
-                                  </button>
+                                        <button type="submit" class="btn btn-outline-default btn-block my-rounded">Search</button>
+                                    </form>
                                 </div>
-                            {% elif user.profile.is_employer %}
+                            </div>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                {% if not user.is_authenticated %}
+                                <div class="">
+                                    <h3 class="text-white mt-5 text-center">Register as</h3>
+                                    <a
+                                        href="{% url 'account_signup' %}"
+                                        type="button"
+                                        class="btn btn-secondary btn-block btn-lg my-rounded"
+                                        style="font-size:25px;"
+                                        data-toggle="tooltip"
+                                        data-placement="right"
+                                        title="Find your dream job!"
+                                    >
+                                        Job Seeker
+                                    </a>
+                                    <a
+                                        href="{% url 'account_signup' %}"
+                                        type="button"
+                                        class="btn btn-secondary btn-block btn-lg my-rounded"
+                                        style="font-size:25px;"
+                                        data-toggle="tooltip"
+                                        data-placement="right"
+                                        title="Get the best employees!"
+                                    >
+                                        Employer
+                                    </a>
+                                </div>
+                                {% elif user.is_authenticated and not user.profile.is_jobseeker and not user.profile.is_employer %}
+                                <a href="{% url 'create_profile' %}">
+                                    <button type="button" class="btn btn-secondary btn-block btn-lg my-rounded" style="font-size:25px;">
+                                        Click here to finish your profile
+                                    </button>
+                                </a>
+                                {% elif user.profile.is_jobseeker %}
+                                <div class="mt-5">
+                                    <a
+                                        href="{% url 'jobs:all' %}"
+                                        type="button"
+                                        class="btn btn-secondary btn-block btn-lg"
+                                        style="font-size:25px;"
+                                        data-toggle="tooltip"
+                                        data-placement="right"
+                                        title="We'll help you find the perfect job"
+                                    >
+                                        Start Applying!
+                                </a>
+                                </div>
+                                {% elif user.profile.is_employer %}
                                 <div class="mt-5">
                                     <a href="{% url 'jobs:create' %}">
-                                        <button type="button" class="btn btn-secondary btn-block btn-lg my-rounded shadow" style="font-size:25px;"  data-toggle="tooltip" data-placement="right" title="We'll help you find the right person for the job">
+                                        <button
+                                            type="button"
+                                            class="btn btn-secondary btn-block btn-lg my-rounded shadow"
+                                            style="font-size:25px;"
+                                            data-toggle="tooltip"
+                                            data-placement="right"
+                                            title="We'll help you find the right person for the job"
+                                        >
                                             Post a Job
-                                          </button>
+                                        </button>
                                     </a>
+                                </div>
+                                {% endif %}
                             </div>
-                              {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- <div class="text-center p-3">
+        <!-- <div class="text-center p-3">
         <h3>Companies currently hiring in Pakistan</h3>
         
     </div> -->
-    <div class="container mt-4" style="font-size: 20px; ">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <a
-                    class="nav-link active"
-                    id="home-tab"
-                    data-toggle="tab"
-                    href="#home"
-                    role="tab"
-                    aria-controls="home"
-                    aria-selected="true" style="padding: 20px;"
-                >Industry</a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a
-                    class="nav-link"
-                    id="profile-tab"
-                    data-toggle="tab"
-                    href="#profile"
-                    role="tab"
-                    aria-controls="profile"
-                    aria-selected="false" style="padding: 20px;"
-                >Job Type</a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a
-                    class="nav-link"
-                    id="contact-tab"
-                    data-toggle="tab"
-                    href="#contact"
-                    role="tab"
-                    aria-controls="contact"
-                    aria-selected="false" style="padding: 20px;"
-                >Location</a>
-            </li>
-        </ul>
-        <div class="p-3">
-            <div class="tab-content" id="myTabContent">
-                <div
-                    class="tab-pane fade show active"
-                    id="home"
-                    role="tabpanel"
-                    aria-labelledby="home-tab"
-                >
-                <div class="row">
-                    {% for industry in industries %}
-                    <div class="col-3">
-                        <a href="{% url 'jobs:industry' industry.id %}">
-                            <p>
-                                {{ industry.name }}
-                            </p>
-                        </a>
+        <div class="container mt-4" style="font-size: 20px; ">
+            <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a
+                        class="nav-link active"
+                        id="home-tab"
+                        data-toggle="tab"
+                        href="#home"
+                        role="tab"
+                        aria-controls="home"
+                        aria-selected="true"
+                        style="padding: 20px;"
+                    >Industry</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a
+                        class="nav-link"
+                        id="profile-tab"
+                        data-toggle="tab"
+                        href="#profile"
+                        role="tab"
+                        aria-controls="profile"
+                        aria-selected="false"
+                        style="padding: 20px;"
+                    >Job Type</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a
+                        class="nav-link"
+                        id="contact-tab"
+                        data-toggle="tab"
+                        href="#contact"
+                        role="tab"
+                        aria-controls="contact"
+                        aria-selected="false"
+                        style="padding: 20px;"
+                    >Location</a>
+                </li>
+            </ul>
+            <div class="p-3">
+                <div class="tab-content" id="myTabContent">
+                    <div
+                        class="tab-pane fade show active"
+                        id="home"
+                        role="tabpanel"
+                        aria-labelledby="home-tab"
+                    >
+                        <div class="row">
+                            {% for industry in industries %}
+                            <div class="col-3">
+                                <a href="{% url 'jobs:industry' industry.id %}">
+                                    <p>
+                                        {{ industry.name }}
+                                    </p>
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
                     </div>
-                    {% endfor %}
+                    <div
+                        class="tab-pane fade"
+                        id="profile"
+                        role="tabpanel"
+                        aria-labelledby="profile-tab"
+                    >...</div>
+                    <div
+                        class="tab-pane fade"
+                        id="contact"
+                        role="tabpanel"
+                        aria-labelledby="contact-tab"
+                    >...</div>
                 </div>
-            </div>
-                <div
-                    class="tab-pane fade"
-                    id="profile"
-                    role="tabpanel"
-                    aria-labelledby="profile-tab"
-                >...</div>
-                <div
-                    class="tab-pane fade"
-                    id="contact"
-                    role="tabpanel"
-                    aria-labelledby="contact-tab"
-                >...</div>
-            </div>
-            <div class="mt-5">
+                <div class="mt-5">
                     <div class="row">
                         <div class="col-6">
                             <div class="p-5">
@@ -192,19 +245,15 @@ Solitaire HR - Home Page
                                 <form method="POST">
                                     {% csrf_token %}
                                     {{contact_form|crispy}}
-                                    <button type="submit" class="btn btn-primary float-right" name='contact'>Contact!</button>
+                                    <button type="submit" class="btn btn-primary float-right" name="contact">Contact!</button>
                                 </form>
                             </div>
                         </div>
-                        <div class="col-6" style="background-image: url({% static 'assets/img/4214558.jpg' %}); background-size: cover; background-position: right;">
-                        </div>
+                        <div class="col-6" style="background-image: url({% static 'assets/img/4214558.jpg' %}); background-size: cover; background-position: right;"></div>
                     </div>
                 </div>
-            </div>
-        
+            </div> -->
         </div>
     </div>
 </div>
-
- 
 {% endblock content %}

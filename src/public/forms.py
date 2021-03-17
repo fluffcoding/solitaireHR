@@ -6,4 +6,9 @@ from .models import Contact
 class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
-        fields = '__all__'
+        exclude = ('user',)
+
+class AnonContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        exclude = ('user',)

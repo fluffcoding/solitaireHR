@@ -11,7 +11,7 @@
             <h1 style="margin:0 ; font-weight: 100;">{{user.profile.company}}</h1>
             <p>{{user.profile.city}}, {{user.profile.company_country}} | {{user.profile.company_type}}</p>
             <div class="float-right">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <a
                             class="nav-link"
@@ -34,8 +34,7 @@
                             aria-selected="false"
                         >Jobs</a>
                     </li>
-                </ul>
-            </div>
+                </ul> --></div>
         </div>
     </div>
     <div class="row">
@@ -62,50 +61,45 @@
                 No website available
                 {% endif %}
                 <h4 class="mt-3" style="font-weight: 100;">Contact Person</h4>
-                <b>Address</b>
+                <b>Name</b>
                 <br>
-                {{user.profile.address}}
-            </div>
+                {{user.profile.contact_person}}
+                <br>
+                <b>
+                    Phone
+                </b><br>{{user.profile.contact_person_phone}}
+                <br>
+                <b>
+                  Official Email  
+                </b><br>{{user.profile.contact_person_official_email}}
+           </div>
         </div>
         <div class="col-9">
-            <div class="tab-content" id="myTabContent">
-                <div
-                    class="tab-pane fade"
-                    id="profile"
-                    role="tabpanel"
-                    aria-labelledby="profile-tab"
-                >
-                    <p class="m-3">This is a detailed description of the project that we have created.</p>
-                </div>
-                <div
-                    class="tab-pane fade show active"
-                    id="job"
-                    role="tabpanel"
-                    aria-labelledby="job-tab"
-                >
-                    {% for job in jobs %}
-                    <div class="card m-4 my-rounded2 shadow">
-                        <div class="card-body">
-                            <a href="{% url 'jobs:detail' job.id %}">
-                                <b>
-                                    {{job.job_designation}}
-                                </b>
-                            </a>
-                            | {{job.city}}, {{job.country}}
-                            <div class="float-right">
-                                {{job.created_at|date}}
-                            </div>
-                            <p>Offer Salary: 20K-25K</p>
-                        </div>
-                    </div>
-                    {% empty %}
-                    <p>You have not posted any jobs.
-                        <a href="{% url 'jobs:create' %}">
-                            Start posting jobs
+            <div>
+                <h5 class="ml-4">Jobs by this Employer</h5>
+                {% for job in jobs %}
+                <div class="card m-4 my-rounded2 shadow">
+                    <div class="card-body">
+                        <a href="{% url 'jobs:detail' job.id %}">
+                            <b>
+                                {{job.job_designation}}
+                            </b>
                         </a>
-                    </p>
-                    {% endfor %}
+                        | {{job.city}}, {{job.country}}
+                        <div class="float-right">
+                            {{job.created_at|date}}
+                        </div>
+                        <p>Offer Salary: 20K-25K</p>
+                    </div>
                 </div>
+                {% empty %}
+                <p>
+                    You have not posted any jobs.
+                    <a href="{% url 'jobs:create' %}">
+                        Start posting jobs
+                    </a>
+                </p>
+                {% endfor %}
             </div>
         </div>
     </div>

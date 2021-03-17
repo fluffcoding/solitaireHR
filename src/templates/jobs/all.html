@@ -6,17 +6,14 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb my-rounded shadow-sm m-3">
           <li class="breadcrumb-item text-default"><a href="/">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Jobs</a></li>
+          <li class="breadcrumb-item" aria-current="page"><a href="{% url 'jobs:all' %}">Jobs</a></a></li>
+          {% if industry %}
+          <li class="breadcrumb-item active">Functional Area: {{industry.name}}</li>
+{% endif %}
         </ol>
       </nav>
     <div class="">
-        {% if industry %}
-        <div class="card my-rounded pr-5 pl-4 m-3 bg-secondary shadow">
-            <h3 style="font-weight: 100;">
-                <span style="font-size: 20px;">Functional Area: {{industry.name}}</span>
-                </h3>
-        </div>
-    {% endif %}
+
     </div>
     <div class="row">
         <!-- <div class="m-3">
@@ -49,6 +46,14 @@
             <form method="GET" action="{% url 'jobs:search' %}">
                 <div class="card m-3 shadow bg-secondary my-rounded">
                     <div class="card-body">
+                        <p class="text-primary" style="font-weight: 600; font-size: 16px;">Job Designation</p>
+                        <div class="form-group">
+                            <input type="text" placeholder="Search" name="query" class="form-control my-rounded mt-3">
+                        </div>
+                    </div>
+                </div>
+                <div class="card m-3 shadow bg-secondary my-rounded">
+                    <div class="card-body">
                         <p class="text-primary" style="font-weight: 600; font-size: 16px;">City</p>
                         <div class="form-group">
                             <input  name='location' type="text" class="form-control my-rounded mt-3" placeholder="Location" list="datalistOptions" id="exampleDataList">
@@ -60,14 +65,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card m-3 shadow bg-secondary my-rounded">
-                    <div class="card-body">
-                        <p class="text-primary" style="font-weight: 600; font-size: 16px;">Job Designation</p>
-                        <div class="form-group">
-                            <input type="text" placeholder="Regular" name="query" class="form-control my-rounded mt-3">
-                        </div>
-                    </div>
-                </div>
+                
                 <button type="submit" class="btn btn-default my-rounded shadow btn-block mt-4">
                     Filter
                     </button>

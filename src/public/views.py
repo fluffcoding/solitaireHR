@@ -1,12 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from users.forms import myForm
 
-from .forms import ContactForm
+from .forms import ContactForm, AnonContactForm
 
 from jobs.models import Industry, choices
 
 from django.contrib import messages
+
+from .models import Contact
 
 
 def index(request):
@@ -39,3 +41,29 @@ def index(request):
     #     form.save(request)
     #     form = myForm()
     return render(request, 'index.html', context)
+
+
+
+def contact_view(request):
+    if request.user.is_authenticated:
+        contacted = Contact.objects.filter(user=request.user)
+        form = ContactForm(request.POST or None)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.user = request.user
+            form.save()
+            return redirect('contact')
+        context = {
+            'form': form,
+            'contacted': contacted
+        }
+    else:
+        form = AnonContactForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+            return redirect('contact')
+
+        context = {
+            'form': form,
+        }
+    return render(request, 'contact.html', context)

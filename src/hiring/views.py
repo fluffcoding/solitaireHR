@@ -25,30 +25,29 @@ def jobApplications(request):
             currentApplication = JobApplication.objects.get(id=id)
             currentApplication.selected = False
             currentApplication.save()
-            return redirect('job_applications')
+            return redirect('hiring:job_applications')
         elif 'unreject' in request.POST:
             id = int(request.POST.get('id'))
             currentApplication = JobApplication.objects.get(id=id)
             currentApplication.selected = None
             currentApplication.save()
-            return redirect('job_applications')
+            return redirect('hiring:job_applications')
         elif 'progress' in request.POST:
             id = int(request.POST.get('id'))
             currentApplication = JobApplication.objects.get(id=id)
             if currentApplication.shortlisted == None:
                 currentApplication.shortlisted = True
                 currentApplication.save()
-                return redirect('job_applications')
 
             elif currentApplication.interviewed == None:
                 currentApplication.interviewed = True
                 currentApplication.save()
-                return redirect('job_applications')
 
             elif currentApplication.selected == None:
                 currentApplication.selected = True
                 currentApplication.save()
-                return redirect('job_applications')
+            return redirect('hiring:job_applications')
+
     context = {
         'jobApplications': jobApps,
     }

@@ -6,21 +6,95 @@
                       <h2 class="mb-4 mr-4 ml-5">Jobs Dashboard</h2>
                         {% for j in job_applications %}
                         <div class="card mb-5 p-4 my-rounded shadow">
-                            <a href="{% url 'jobs:detail' j.job.id %}">
-                                <h5>{{j.job.job_designation}}</h5>
-                            </a>
-
-                            <p class="bg-secondary text-primary p-3 text-center my-rounded" style="font-weight: 400;">Applied 
-                                <i class="ni ni-check-bold"></i>
-                                <span class="ml-5 text-gray">Shortlisted</span>
-                                <span class="ml-5 text-gray">Interviewed</span>
-                                <span class="ml-5 text-gray">Selected</span>
+                                <h5>
+                                    <a href="{% url 'jobseeker_profile' j.job_seeker.id %}">
+                                        {{j.job_seeker.profile.full_name}}
+                                    </a> applied for 
+                                    <a href="{% url 'jobs:detail' j.job.id %}">
+                                        {{j.job.job_designation}}
+                                    </a>
+                                </h5>
+                                <p style="margin: 0;">View Employer's profile by 
+                                    <a href="{% url 'employer_profile' j.job.created_by.id %}">
+                                        clicking here
+                                    </a>.</p>
+                            <p>
+                                <span class="badge badge-warning">
+                            Minimum Salary: {{j.expected_salary_minimum}} PKR
+                                </span>
+                                <span class="badge badge-danger">
+                                    Maximum Salary:     {{j.expected_salary_maximum}} PKR
+                                        </span>
                             </p>
+                            {% if j.is_rejected %}
+                            <p class="bg-warning text-white p-3 text-center my-rounded" style="font-weight: 400;">
+                                Application has been rejected.
+                            </p>
+                            {% else %}
+                            <!-- <form method="post">                                    {% csrf_token %} -->
+                            {% if j.selected %}
+                            <p class="bg-success text-white p-3 text-center my-rounded">
+                            {% else %}
+                            <p class="bg-secondary text-primary p-3 text-center my-rounded">
+
+                            {% endif %}
+                            {% if j.applied %}
+                                <span class="ml-3" style="font-weight: 400;">
+                                    Applied
+                                </span> 
+                                <i class="ni ni-check-bold"></i>
+                            {% else %}
+                                <span class="pl-3 text-gray">
+                                    Applied
+                                </span>
+                            {% endif %}
+                            {% if j.shortlisted %}
+                            <span class="pl-3" style="font-weight: 400;">
+                                Shortlisted
+                            </span> 
+                            <i class="ni ni-check-bold"></i>
+                        {% else %}
+                            <span class="pl-3 text-gray">
+                                Shortlisted
+                                <!-- <input type="hidden" name="upgrade" value="shortlist">    
+                                <input type="hidden" name="shortlisted" value="{{j.id}}">
+
+                                    <button type="submit" class="btn btn-link text-warning ml--3" style="font-size: 25px;">
+                                        <i class="ni ni-check-bold"></i>
+                                    </button> -->
+                                                            </span>
+                        {% endif %}
+                        {% if j.interviewed %}
+                                <span class="pl-3" style="font-weight: 400;">
+                                    Interviewed
+                                </span> 
+                                <i class="ni ni-check-bold"></i>
+                            {% else %}
+                                <span class="pl-3 text-gray">
+                                    Interviewed
+                                </span>
+                            {% endif %}
+                            {% if j.selected %}
+                                <span class="pl-3" style="font-weight: 400;">
+                                    Selected
+                                </span> 
+                                <i class="ni ni-check-bold"></i>
+                            {% else %}
+                                <span class="pl-3 text-gray">
+                                    Selected
+                                </span>
+                            {% endif %}
+
+                            </p>
+                        <!-- </form> -->
+                            {% endif %}
+                            <div>
+
+                            </div>
                         </div>
+
                         {% empty %}
-                        <p>You have not applied for any positions. To start applying, view jobs
-                            <a href="{% url 'jobs:all' %}">here</a>.
-                        </p>
+                        <p>You have no job applications.</p>
                         {% endfor %}
                       </div>
     {% endblock %}

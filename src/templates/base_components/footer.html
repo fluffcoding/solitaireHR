@@ -1,78 +1,66 @@
 <footer class="footer has-cards">
     <div class="container container-lg">
+        <div class="m-3 text-center">
+            <p class="sometimes" style="font-size: 25px; font-weight: 100;">
+                Have any queries?
+                <a href="{% url 'contact' %}" class="btn btn-primary btn-lg pl-5 pr-5 ml-5" style="font-size: 25px; font-weight: 100;">Contact Us</a>
+            </p>
+        </div>
+        <hr>
         <div class="row text-center">
-            <div class="col-3">
-                <h4>Jobs by City</h4>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
+            <div class="col-lg-6 col-md-12">
+                <h4>Jobs by Industry</h4>
+                {% for industry in all_industries %}
+                <a href="{% url 'jobs:industry' industry.id %}">Jobs in {{industry}}</a>
+                <br>
+                {% empty %}
+                <p>No Industries available</p>
+                {% endfor %}
             </div>
-            <div class="col-3">
+            <div class="col-lg-6 col-md-12">
                 <h4>Jobs by City</h4>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-            </div>
-            <div class="col-3">
-                <h4>Jobs by City</h4>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-            </div>
-            <div class="col-3">
-                <h4>Jobs by City</h4>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
-                <a href="#">Jobs in Karachi</a><br>
+                {% for city in all_cities %}
+                <form method="GET" action="{% url 'jobs:search' %}" style="margin: 0;">
+                    <input
+                        name="location"
+                        type="hidden"
+                        value="{{city.1}}"
+                        style="margin:0;"
+                    >
+            <button type="submit" class="btn btn-link" style="font-family: Open Sans, sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            line-height: 0.2;
+        
+            margin: 0; text-transform: capitalize;">Jobs in {{city.1}}</button>
+        </form>
+        
+                {% empty %}
+                <p>No Cities available</p>
+                {% endfor %}
             </div>
         </div>
-        
     </div>
     <div class="container mt-3 p-5">
-        <div class="row align-items-center justify-content-md-between mt-5">
-            <a href="#">Internship Jobs</a> | 
-            <a href="#">Internship Jobs</a> | 
-            <a href="#">Internship Jobs</a> | 
-            <a href="#">Internship Jobs</a> | 
-            <a href="#">Internship Jobs</a> 
-        </div>
         <hr>
         <div class="row align-items-center justify-content-md-between">
             <div class="col-md-6">
                 <div class="copyright">
-                    &copy; 2020 <a href=".">Solitaire HR</a>.
+                    &copy; 2021
+                    <a href="/">Solitaire HR</a>
+                    .
                 </div>
             </div>
             <div class="col-md-6">
-                <ul class="nav nav-footer justify-content-end">
+                <div class="copyright">
+                    Powered by 
+                        Fluff Coding
+                </div>
+                <!-- <ul class="nav nav-footer justify-content-end">
                     <li class="nav-item">
                         <a href="/" class="nav-link">About Us</a>
                     </li>
-                </ul>
+                </ul> -->
             </div>
         </div>
     </div>

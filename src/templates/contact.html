@@ -1,0 +1,50 @@
+{% extends 'norm_base.html' %} {% block title %} {% endblock %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<div class="container container-sm">
+    <div class="card my-rounded" style="margin: 8rem; padding: 5rem; background-color: whitesmoke">
+        <h2 style="font-weight: 100;">
+            Contact Us!
+        </h2>
+
+    <div class=" my-rounded">
+        {% if contacted %}
+        <p class="">Your Messages:</p>
+        <ul>
+            {% for contact in contacted %}
+            <li>{{contact.message}}</li>
+            {% empty %}
+            <p>You have not contacted us yet.</p>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="">Please 
+            <a href="{% url 'account_login' %}">login</a>
+             to save your messages to us!</p>
+        {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button type="submit" class="btn btn-default my-rounded btn-lg">Post</button>
+    </form>
+    
+    </div>
+</div>
+</div>
+<style>
+    body {
+        background: url("{% static 'assets/img/imp/8.jpg' %}");
+        background-size: cover;
+        background-position: center;
+    }
+    .sometimes {
+        color: white;
+    }
+</style>
+{% endblock %}
+{% block modal %}
+{% endblock %}
