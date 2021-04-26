@@ -1,6 +1,6 @@
 from jobs.models import Job, Industry
 
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from .models import User, Profile, JobSeekerProfile, Projects, Reference
 
 from django.contrib.auth.decorators import login_required
@@ -12,7 +12,9 @@ from .forms import (profileForm1
 , profileForm6
 , jobSeekerForm
 , ProjectsForm
-,ReferenceForm)
+,ReferenceForm
+,editEmployerProfileForm
+,editJobSeekerProfileForm)
 
 
 
@@ -177,3 +179,20 @@ def jobseeker_profile(request, id):
     elif user.profile.is_employer:
         return redirect('employer_profile', id=id)
     
+
+@login_required
+def edit_profile(request):
+    profile = request.user.profile
+    if profile.is_employer:
+        form = editJobSeekerProfileForm(request.POST or None, instance=profile)
+    elif profile.is_jobseeker:
+        form = editEmployerProfileForm(request.POST or None, instance=profile)
+    else:
+        return HttpResponse('<h1>Finish your profile.</h1>')
+    if form.is_valid():
+        updated = form.save(commit=False)
+        updated.user = request.user
+        updated.save()
+        return redirect('edit_profile')
+    context = {'form': form}
+    return render(request, 'account/edit_profile.html', context)

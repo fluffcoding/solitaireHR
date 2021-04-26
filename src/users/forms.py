@@ -140,3 +140,21 @@ class profileForm6(forms.ModelForm):
 	class Meta:
 		model = Profile
 		fields = ('contact_person','contact_person_phone','contact_person_official_email')
+
+
+
+class editEmployerProfileForm(forms.ModelForm):
+	class Meta:
+		model = Profile
+		exclude = ('user','is_employer','is_jobseeker', 'preferred_job_designation', 'preferred_job_city', 'expected_salary', 'current_designation', 'current_company', 'experience', 'current_salary')
+		widgets = {
+            'date_of_birth': DateInput(),
+        }
+
+class editJobSeekerProfileForm(forms.ModelForm):
+	class Meta:
+		model = Profile
+		exclude = ('user','is_employer' ,'is_jobseeker', 'company', 'company_type', 'company_country', 'city', 'branch_name', 'company_website', 'phone', 'address', 'number_of_employees', 'industry', 'operating_since', 'contact_person', 'contact_person_phone', 'contact_person_official_email')
+		widgets = {
+            'date_of_birth': DateInput(),
+        }

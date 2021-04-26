@@ -30,6 +30,7 @@ class Profile(models.Model):
     website = models.URLField(null=True, blank=True)
     mobile_phone = models.CharField(max_length=15, null=True, blank=True)
     zip_code = models.CharField(null=True, blank=True, max_length=20)
+    
     preferred_job_designation = models.CharField(max_length=100, null=True, blank=True)
     preferred_job_city = models.CharField(max_length=50, choices=choices['city'], null=True, blank=True)
     expected_salary = models.CharField(max_length=50, choices=choices['salary'], null=True, blank=True)
